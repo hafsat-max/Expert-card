@@ -9,16 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@mantine/carousel": "^6.0.16",
+    "@mantine/core": "^6.0.16",
+    "@mantine/form": "^6.0.16",
+    "@mantine/hooks": "^6.0.16",
+    "@mantine/modals": "^6.0.16",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "clsx": "^1.2.1",
+    "embla-carousel-react": "^7.1.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "iconsax-react": "^0.0.8",
     "next": "13.4.8",
+    "pietile-carousel": "^3.2.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-responsive-carousel": "^3.2.23",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6"
   }
