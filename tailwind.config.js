@@ -25,7 +25,8 @@ module.exports = {
       border:{
         input:'1px solid #EBEBEB',
         border: '1px solid F5F6F7',
-        grey: '1px solid #EBEBEB'
+        grey: '1px solid #EBEBEB',
+        'light': '2px solid #F2F2F2'
 
       },
       borderRadius:{
@@ -39,24 +40,25 @@ module.exports = {
         engineering: "#C81107",
         'davy-grey': '#54565B',
         'blood-red':"#6D0802",
+        'phillipine-silver': '#B4B4B0',
         'spanish-gray': '#9FA19C',
-        'dim-gray':'#696B6F'
+        'dim-gray':'#696B6F',
+        'gray': '#7C827D',
+        dim: '#656C6C'
 
       },
       fontFamily: {
         switzer: 'Switzer'
       },
       fontSize:{
+        12: "clamp(8px,0.8vw,12px)",
+        14: 'clamp(13px,1vw,14px)',
         16: "clamp(14px,1vw,16px)",
         20: 'clamp(18px, 1.5vw,20px )',
         24: 'clamp(22px,2vw,24px)',
+        31: "clamp(28px,1.7vw,31px)",
         32: "clamp(24px,2vw,32px)",
         48: "clamp(32px,3vw,48px)",
-        20: "clamp(16px,1.3vw,20px)",
-        12: "clamp(8px,0.8vw,12px)",
-        31: "clamp(28px,1.7vw,31px)",
-        150: "clamp(90px,9.4vw,150px)",
-
       },
       gap: {
         '16': '1rem',

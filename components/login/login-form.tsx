@@ -49,7 +49,6 @@ const LoginForm = () => {
         <PasswordInput
           placeholder="••••••••"
           label="Password"
-          required
           classNames={{
             root: "flex flex-col gap-5 mt-10",
             innerInput: clsx(

@@ -22,6 +22,9 @@ const FilterInput = () => {
             border: "none !important",
             flex:"1 !important"
           },
+          root:{
+            fontSize: '12px !important'
+          }
         }}
       />
 

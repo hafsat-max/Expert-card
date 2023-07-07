@@ -33,16 +33,16 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-3">
 
-          <div className=" flex justify-center items-center rounded-full border  border-2-[#F2F2F2] w-[40px] h-[40px]">
+          <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
           <Edit2 size="20" color="#C9C8C6" className="font-bold"  />
           </div>
 
-          <div className=" flex justify-center items-center rounded-full border  border-2-[#F2F2F2] w-[40px] h-[40px]">
+          <div className=" flex justify-center items-center rounded-full   border-2 border-[#F2F2F2] w-[40px] h-[40px]">
           <LogoutCurve size="22" color="#C9C8C6"  className=" rotate-[-90deg]"/>
           </div>
 
 
-          <div className=" flex justify-center items-center rounded-full border  border-2-[#F2F2F2] w-[40px] h-[40px]">
+          <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
           <Disable />
           </div>
           </div>

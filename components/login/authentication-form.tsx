@@ -41,9 +41,16 @@ const AuthenticationForm = () => {
           >
             <Group position="center">
               <PinInput
-                classNames={{
-                  input:
-                    "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
+              placeholder='0'
+                styles={{
+                  input:{
+                    fontWeight: 700,
+                    '::placeholder': {
+                      fontWeight: 700,
+                      color: 'black'
+                    }
+                  }
+                    // "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
                 }}
                 type="number"
                 length={6}
