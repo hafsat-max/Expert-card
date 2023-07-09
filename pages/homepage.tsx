@@ -10,6 +10,7 @@ import FilterInput from "@/components/shared/filter-input";
 import { Edit2, LogoutCurve } from "iconsax-react";
 import Disable from "@/components/icons/disable";
 import NoCards from "@/components/home/no-cards";
+import { TableData } from "@/components/create-card/table";
 
 const Dashboard = () => {
   return (
@@ -52,6 +53,7 @@ const Dashboard = () => {
         <div className='max-w bg-white flex-1 flex justify-center items-center'>
             <NoCards />
         </div>
+        {/* <TableData /> */}
       </main>
     </section>
   );

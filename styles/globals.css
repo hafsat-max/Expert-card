@@ -106,7 +106,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Hide the default scrollbar */
 body::-webkit-scrollbar {
   display: none;
@@ -118,12 +117,27 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
-*{
-  font-family: 'Switzer';
-
+* {
+  font-family: "Switzer";
 }
 
-.custom-modal::-webkit-scrollbar{
-display: none;
+.custom-modal::-webkit-scrollbar {
+  display: none;
 }
 
+th {
+  color: #c1c2c6 !important;
+}
+
+td {
+  color: #7c827d !important;
+}
+th,
+td {
+  font-size: clamp(14px, 1vw, 16px) !important;
+}
+
+.mantine-1q18irc::-webkit-scrollbar, .mantine-1qusw1r::-webkit-scrollbar{
+  display: none;
+
+}

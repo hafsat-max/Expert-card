@@ -35,7 +35,7 @@ const ResetPasswordForm = () => {
           >
            Enter Password
           </label>
-          <div className=" flex justify-between border border-inpu rounded-lg">
+          <div className=" flex justify-between border overflow-hidden rounded-lg">
             <input
               type="password"
               placeholder="Enter your new password"
@@ -44,7 +44,6 @@ const ResetPasswordForm = () => {
                 "bg-input  py-4 outline-none pl-4 text-xs text-spanish-gray w-full "
               )}
             />
-            <img src="/login/eye-slash.svg" alt="eye" className="pr-1" />
           </div>
         </fieldset>
 
@@ -56,7 +55,7 @@ const ResetPasswordForm = () => {
           >
            Confirm Password
           </label>
-          <div className=" flex justify-between border border-inpu rounded-lg">
+          <div className=" flex justify-between border overflow-hidden  rounded-lg">
             <input
               type="password"
               placeholder="Re-enter your new password"
@@ -65,7 +64,6 @@ const ResetPasswordForm = () => {
                 "bg-input  py-4 outline-none pl-4 text-xs text-spanish-gray w-full "
               )}
             />
-            <img src="/login/eye-slash.svg" alt="eye" className="pr-1" />
           </div>
         </fieldset>
 

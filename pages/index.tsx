@@ -40,25 +40,20 @@ const index = () => {
         style={{ backgroundImage: "url('/home/background.png')" }}
       >
         {/* logo header */}
-        <Nav style="w-[90vw] ml-auto">
+        <Nav style="w-[94vw] mx-auto max-w[1440px] ">
 
         </Nav>
 
         {/* landing page main section*/}
 
-        <section className="flex items-center flex-1 w-[90vw] ml-auto">
-          <div className=" flex justify-between relative ">
+        <section className="flex items-center flex-1 ">
+          <div className=" flex justify-between relative w-[94vw] mx-auto max-w-[1440px]">
             {/* texts section */}
             <TextSection />
 
             {/* carousel section */}
             <LandingCarousel />
 
-            {/* Positioned icons */}
-            {/* <Image src={'/home/grey.svg'} width={56} height={56} alt="icon" className="absolute right-[426px]"/> */}
-            {/* <Image src={'/home/big-circle.svg'} width={56} height={56} alt="icon" className="absolute"/> */}
-            {/* <Image src={'/home/big-icon.svg'} width={56} height={56} alt="icon" className="absolute"/> */}
-            {/* <Image src={'/home/small-circle.svg'} width={56} height={56} alt="icon" className="absolute"/> */}
           </div>
         </section>
       </section>
