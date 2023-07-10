@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import Link from "next/link";
+import { AuthContext, ContextType, UserDetails } from "@/pages/_app";
 
 const UserDisplay = () => {
+  const [payload, setPayload] = useState<UserDetails> ({
+    img: "",
+    first_name : '',
+  })
+
+  useEffect(() => {
+    
+
+    if(localStorage.getItem("my-user")){
+  setPayload(JSON.parse(localStorage.getItem("my-user") as string))
+}
+
+  return () => {
+    
+  }
+}, [])
   return (
     <section className="flex justify-between items-center gap-8  border-l-2 border-[#E8ECEF] pl-7 py-[15px]">
       <Image
@@ -16,7 +33,7 @@ const UserDisplay = () => {
       <div className={clsx("flex gap-2 items-center")}>
         <Image src={"/shared/person.svg"} width={32} height={32} alt="person" />
         <p className=" text-spanish-gray font-medium">
-          Welcome, <span className=" text-davy-grey">Gloria</span>
+          Welcome, <span className=" text-davy-grey">{payload?.first_name}</span>
         </p>
       </div>
 

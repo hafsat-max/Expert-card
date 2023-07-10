@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Button, Group, Modal, Stepper } from "@mantine/core";
 
 import PersonalInfo from "./personal-info";
@@ -16,6 +16,14 @@ export function CreateCard({ opened, close }: IModalProps) {
     imgValue: "myImage.png",
     firstName: "",
     lastName: "",
+  });
+
+  const [organizationInfo, setOrganizationInfo] = useState({
+    phoneNumber: "",
+    emailAddress: "",
+    // selectAddress: "",
+    role: "",
+    // tribe: "",
   });
 
   const nextStep = () => {
@@ -43,7 +51,20 @@ export function CreateCard({ opened, close }: IModalProps) {
       } else {
         allowValidate = true;
       }
+
+      // do validation for first input which is totalFormData
     } else if (active == 1) {
+      if (
+        !organizationInfo.emailAddress ||
+        !organizationInfo.phoneNumber ||
+        !organizationInfo.role
+        ) {
+        console.log('first')
+        allowValidate = false;
+      } else {
+        allowValidate = true;
+        console.log('jkl')
+      }
     }
 
     return allowValidate;
@@ -57,9 +78,7 @@ export function CreateCard({ opened, close }: IModalProps) {
       centered
       className="custom-modal "
       styles={{
-        root: {
-    
-        },
+        root: {},
         content: {
           borderRadius: "12px",
           msOverflowStyle: "-ms-autohiding-scrollbar",
@@ -72,9 +91,9 @@ export function CreateCard({ opened, close }: IModalProps) {
           scrollbarWidth: "none",
           msOverflowStyle: "none",
           overflow: "auto",
-          display: 'grid',
-          height: '100%',
-          gridTemplateRows: 'auto 1fr auto'
+          display: "grid",
+          height: "100%",
+          gridTemplateRows: "auto 1fr auto",
         },
         title: {
           color: "#54565B",
@@ -96,10 +115,10 @@ export function CreateCard({ opened, close }: IModalProps) {
         breakpoint="sm"
         color="#C81107"
         styles={{
-          root:{
-            overflow: 'auto',
-            display: 'grid',
-            gridTemplateRows: 'auto 1fr'
+          root: {
+            overflow: "auto",
+            display: "grid",
+            gridTemplateRows: "auto 1fr",
           },
           separator: {
             backgroundColor: "#EFF0F6",
@@ -111,7 +130,7 @@ export function CreateCard({ opened, close }: IModalProps) {
             backgroundColor: "#C81107",
           },
           content: {
-            overflow: 'auto'
+            overflow: "auto",
           },
         }}
       >
@@ -123,7 +142,11 @@ export function CreateCard({ opened, close }: IModalProps) {
         </Stepper.Step>
 
         <Stepper.Step completedIcon={<span>2</span>}>
-          <OrganizationInfo />
+          <OrganizationInfo
+            currentFormData={organizationInfo}
+            handleCurrentFormData= {setOrganizationInfo}
+          />
+        
         </Stepper.Step>
 
         <Stepper.Step completedIcon={<span>3</span>}>
@@ -165,7 +188,7 @@ export function CreateCard({ opened, close }: IModalProps) {
             },
           }}
         >
-          Next
+          {active===2? 'Create' : 'Next'}
         </Button>
       </Group>
     </Modal>

@@ -141,3 +141,16 @@ td {
   display: none;
 
 }
+td{
+  border-color: white !important;
+}
+.Toastify__toast-container {
+  border-color: #C81107 !important;
+}
+
+.customToast {
+  border-color: #C81107;
+}
+.outline-none:focus{
+  border-color: none ;
+}

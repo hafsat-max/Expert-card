@@ -1,18 +1,36 @@
 import React from "react";
 import { Select, TextInput } from "@mantine/core";
-import Image from "next/image";
-import { Icon } from "iconsax-react";
 
-import number from "../../public/create-card/number.svg";
-import Link from "next/link";
+interface PersonalInfoProp {
+  currentFormData: InnerPersonal;
+  handleCurrentFormData: (val: InnerPersonal) => void;
+}
+interface InnerPersonal {
+  phoneNumber: string;
+  emailAddress: string;
+  // selectAddress: string;
+  role: string;
+  // tribe: string;
+}
 
-const OrganizationInfo = () => {
+const OrganizationInfo = ({
+  currentFormData,
+  handleCurrentFormData,
+}: PersonalInfoProp) => {
   return (
     <section>
       {/* Work Phone */}
       <TextInput
+      type="number"
         placeholder="Enter Work Phone"
         label="Work Phone"
+        value={currentFormData.phoneNumber}
+        onChange={(e) => {
+          handleCurrentFormData({
+            ...currentFormData,
+            phoneNumber: e.target.value,
+          });
+        }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
           input:
@@ -27,8 +45,16 @@ const OrganizationInfo = () => {
       />
 
       <TextInput
+      type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
+        value={currentFormData.emailAddress}
+        onChange={(e) => {
+          handleCurrentFormData({
+            ...currentFormData,
+            emailAddress: e.target.value,
+          });
+        }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
           input:
@@ -38,7 +64,14 @@ const OrganizationInfo = () => {
       />
 
       {/* select address */}
-      <Select
+      {/* <Select
+        searchValue={currentFormData}
+        onChange={(e) => {
+          handleCurrentFormData({
+            ...currentFormData,
+            selectAddress: e.target.value,
+          });
+        }}
         label={
           <div className="flex justify-between items-center">
             <span className="text-davy-grey text-sm leading-4">
@@ -76,10 +109,19 @@ const OrganizationInfo = () => {
               "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi - Lagos, Lagos State, Nigeria.",
           },
         ]}
-      />
+      /> */}
 
       {/* Role designation */}
       <TextInput
+      type="text"
+      value={currentFormData.role}
+
+      onChange={(e) => {
+        handleCurrentFormData({
+          ...currentFormData,
+          role: e.target.value,
+        })
+      }}
         placeholder=" Enter Role / Designation"
         label="Role / Designation"
         classNames={{
@@ -91,7 +133,7 @@ const OrganizationInfo = () => {
       />
 
       {/* tribe/ department */}
-      <Select
+      {/* <Select
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
         classNames={{
@@ -102,8 +144,7 @@ const OrganizationInfo = () => {
         }}
         data={[
           {
-            label:
-              "3rd Floor, Yobe Investment House, Plot 1332, Ralph Sho...",
+            label: "3rd Floor, Yobe Investment House, Plot 1332, Ralph Sho...",
             value:
               "3rd Floor, Yobe Investment House, Plot 1332, Ralph Shodeinde Street, Behind Federal Ministry of Finance, Central Business District, Abuja, Nigeria.",
           },
@@ -118,7 +159,7 @@ const OrganizationInfo = () => {
               "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi - Lagos, Lagos State, Nigeria.",
           },
         ]}
-      />
+      /> */}
     </section>
   );
 };

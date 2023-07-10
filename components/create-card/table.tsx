@@ -6,7 +6,7 @@ import clsx from "clsx";
 export function TableData() {
   const tableHead = (
     <tr>
-      <th>Card</th>
+      <th className="flex justify-center">Card</th>
       <th>Xpert Name</th>
       <th>Email Address</th>
       <th>Designation</th>
@@ -16,8 +16,14 @@ export function TableData() {
 
   const rows = data.map((item) => (
     <tr key={item.id}>
-      <td>
-        <Image src={item.card} width={24} height={14.24} alt="cards" />
+      <td className="flex justify-center ">
+        <div className=" flex justify-center">
+        <Image src={item.card} width={24} height={14.24} alt="cards" style={{
+          width: item.width,
+          height: item.height
+        }}/>
+
+        </div>
       </td>
       <td>{item.xpert}</td>
       <td>{item.email}</td>

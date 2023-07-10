@@ -6,6 +6,7 @@ export const data = [
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Active",
+
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const data = [
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Active",
+
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const data = [
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Inactive",
+
   },
   {
     id: 4,
@@ -33,25 +36,32 @@ export const data = [
   },
   {
     id: 5,
-    card: "/create-card/tablecard-ls.svg",
+    card: "/create-card/tablecard-pt.svg",
     xpert: "Abdulraheem Yusuf",
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Inactive",
+    width: 13.71,
+    height: 24
+
   },
    { id: 6,
-    card: "/create-card/tablecard-ls.svg",
+    card: "/create-card/tablecard-pt.svg",
     xpert: "Ayodeji Balogun",
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Inactive",
+    width: 13.71,
+    height: 24
   },
    { id: 7,
-    card: "/create-card/tablecard-ls.svg",
+    card: "/create-card/tablecard-pt.svg",
     xpert: "Ayodeji Balogun",
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Inactive",
+    width: 13.71,
+    height: 24
   },
    { id: 8,
     card: "/create-card/tablecard-ls.svg",
@@ -61,11 +71,13 @@ export const data = [
     status: "Inactive",
   },
    { id: 9,
-    card: "/create-card/tablecard-ls.svg",
+    card: "/create-card/tablecard-pt.svg",
     xpert: "Cynthia Chia",
     email: "ayusuf@afexnigeria.com",
     designation: "VP, Innovation and Technology",
     status: "Inactive",
+    width: 13.71,
+    height: 24
   },
    { id: 10,
     card: "/create-card/tablecard-ls.svg",

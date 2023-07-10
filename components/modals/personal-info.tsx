@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button, PasswordInput, TextInput } from "@mantine/core";
-import { Group, Text, useMantineTheme, rem } from "@mantine/core";
-import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
+import { Group, Text, rem } from "@mantine/core";
+import { IconUpload, IconX } from "@tabler/icons-react";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import Link from "next/link";
 
@@ -21,6 +21,15 @@ const PersonalInfo = ({
   handleCurrentFormData,
 }: PersonalInfoProp) => {
   const [imgPreview, setImgPreview] = useState("");
+  const [imgSize, setImgSize] = useState("");
+  const [fileName, setFileName] = useState("");
+
+  useEffect(() => {
+    if (imgPreview) {
+      const fileName = imgPreview.split("/").pop() || "";
+      // setImgTitle(fileName);
+      }
+  }, [imgPreview]);
 
   return (
     <div>
@@ -29,15 +38,19 @@ const PersonalInfo = ({
       </h3>
 
       <Dropzone
-        onDrop={(files) => {
+        onDrop={(files: any) => {
           const reader = new FileReader();
+          setFileName(files[0].name);
+          setImgSize((files[0].size));
+          const data =files[0].size;
+          console.log(data/1024)
           reader.readAsDataURL(files[0]);
 
           reader.onload = () => {
-            setImgPreview(reader.result as string) ;
+            setImgPreview(reader.result as string);
           };
         }}
-        onReject={(files) => console.log("rejected files", files)}
+        // onReject={(files) => console.log("rejected files", files)}
         maxSize={3 * 1024 ** 2}
         accept={IMAGE_MIME_TYPE}
         styles={{
@@ -62,11 +75,14 @@ const PersonalInfo = ({
             <IconX size="3.2rem" stroke={1.5} />
           </Dropzone.Reject>
           {imgPreview ? (
-            <div className=' flex flex-col gap-2'>
-              <div className="rounded-lg">
-              <Image src={imgPreview} alt="" width={150} height={150} />
+            <div className=" flex flex-col gap-2 justify-center items-center">
+              <div className="rounded-[11px] p-[1px] border border-[#7C827D]">
+                <Image src={imgPreview} alt="" width={150} height={150} />
               </div>
-              <span>{}</span>
+              <div className="flex justify-between items-center gap-4">
+              <span className=" text-davy-grey text-14 ">{fileName}</span>
+              <span className=" text-phillipine-silver text-[10px]">{imgSize}MB Image</span>
+              </div>
             </div>
           ) : (
             <>

@@ -14,7 +14,7 @@ const NoCards = () => {
 
         <Link href={'/'}>
         <Button
-      className=" flex justify-between items-center gap-3"
+      className=" flex justify-between items-center gap-3 py-[12px] px-[20px] h-[48px]"
         styles={{
           root: {
             background: "#C81107 !important",
