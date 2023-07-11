@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Nav from "@/components/shared/nav";
 import UserDisplay from "@/components/shared/user-display";
@@ -13,20 +13,25 @@ import NoCards from "@/components/home/no-cards";
 import { TableData } from "@/components/create-card/table";
 import axios from "axios";
 
-const Dashboard = () => {
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("my-user") as string)
-    console.log(token.token.toString())
+const Homepage = () => {
+  const [xperts, setXperts] = useState([]);
+
+  const fetchData = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
     axios({
       url: "https://web-production-5804.up.railway.app/api/card/expert_cards/",
       headers: {
-        Authorization: `Bearer ${token.token}`
-      }
+        Authorization: `Bearer ${token.token}`,
+      },
     })
-      .then(function (response) {
-        console.log(response)
+      .then(function ({ data }) {
+        setXperts(data.results);
       })
       .catch(function (error) {});
+  };
+
+  useEffect(() => {
+    fetchData()
     return () => {};
   }, []);
 
@@ -41,7 +46,7 @@ const Dashboard = () => {
       <main className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full gap-1 ">
         {/* card listing */}
         <CardListing>
-          <ViewCard />
+          <ViewCard fetchData={fetchData}/>
         </CardListing>
 
         {/* filter nav */}
@@ -69,13 +74,16 @@ const Dashboard = () => {
         </FilterNav>
 
         {/* cards display section */}
-        <div className="max-w bg-white flex-1 flex justify-center items-center">
-          <NoCards />
-        </div>
-        {/* <TableData /> */}
+        {xperts.length ? (
+          <TableData xperts={xperts} />
+        ) : (
+          <div className="max-w bg-white flex-1 flex justify-center items-center">
+            <NoCards />
+          </div>
+        )}
       </main>
     </section>
   );
 };
 
-export default Dashboard;
+export default Homepage;

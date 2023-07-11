@@ -6,7 +6,7 @@ const FlippingCard = () => {
 
   return (
     <div
-      className={` rounded-lg  cursor-pointer overflow-hidden ${
+      className={` rounded-lg  cursor-pointer overflow-hidden c ${
         isFlipped ? "flipped" : ""
       }`}
       onMouseEnter={() => setIsFlipped(true)}

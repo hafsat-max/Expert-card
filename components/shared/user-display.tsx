@@ -6,21 +6,21 @@ import { AuthContext, ContextType, UserDetails } from "@/pages/_app";
 
 const UserDisplay = () => {
   const [payload, setPayload] = useState<UserDetails> ({
-    img: "",
+    profile_picture: "",
     first_name : '',
   })
 
   useEffect(() => {
-    
-
     if(localStorage.getItem("my-user")){
   setPayload(JSON.parse(localStorage.getItem("my-user") as string))
 }
-
-  return () => {
-    
-  }
 }, [])
+
+const handleLogout = () => {
+  localStorage.clear();
+  window.location.href = "/login";
+};
+
   return (
     <section className="flex justify-between items-center gap-8  border-l-2 border-[#E8ECEF] pl-7 py-[15px]">
       <Image
@@ -30,16 +30,16 @@ const UserDisplay = () => {
         height={30}
       />
 
-      <div className={clsx("flex gap-2 items-center")}>
-        <Image src={"/shared/person.svg"} width={32} height={32} alt="person" />
+      <div className={clsx("flex gap-2 items-center ")}>
+        <img src={payload?.profile_picture} width={32} height={32} alt="person" className="rounded-full w-[32px] h-[32px]" />
         <p className=" text-spanish-gray font-medium">
           Welcome, <span className=" text-davy-grey">{payload?.first_name}</span>
         </p>
       </div>
 
-      <Link href={'/login'}>
-        <Image src={"/shared/logout.svg"} width={29} height={29} alt="person" />
-      </Link>
+
+        <Image src={"/shared/logout.svg"} width={29} height={29} alt="person"  onClick={handleLogout} className=" cursor-pointer"/>
+
     </section>
   );
 };

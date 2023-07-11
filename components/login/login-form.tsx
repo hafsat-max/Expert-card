@@ -25,15 +25,18 @@ const LoginForm = () => {
         password: value.password,
       })
       .then(function (response) {
+        const token = JSON.parse(localStorage.getItem("my-user") as string);
+        console.log(response.data.profile_picture)
+
         if (response.data?.token) {
           localStorage.setItem("my-user", JSON.stringify(response.data));
-          toast("You have successfully logged in");
+          toast.success("You have successfully logged in");
           router.push("/homepage");
         }
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("invalid login parameters");
+        toast.error("Invalid login credentials or not a verified user");
       });
   };
 

@@ -1,31 +1,41 @@
 import React, { use, useState } from "react";
 import { Button, Group, Modal, Stepper } from "@mantine/core";
 
-import PersonalInfo from "./personal-info";
+import PersonalInfo, { InnerPersonal } from "./personal-info";
 import OrganizationInfo from "./organization-info";
 import CardStyle from "./card-style";
+import { CardSuccess } from "./card-success";
+import { useDisclosure } from "@mantine/hooks";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-interface IModalProps {
+export interface IModalProps {
   opened: boolean;
   close: () => void;
+  closeSecondModal?: () => void;
+  fetchData: () => void;
 }
 
-export function CreateCard({ opened, close }: IModalProps) {
+export function CreateCard({ opened, fetchData, close }: IModalProps) {
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const [successOpened, { open: opensuccess, close: closesuccess }] =
+    useDisclosure(false);
+
   const [active, setActive] = useState(0);
-  const [totalFormData, seTotalFormData] = useState({
-    imgValue: "myImage.png",
-    firstName: "",
-    lastName: "",
-  });
-
-  const [organizationInfo, setOrganizationInfo] = useState({
-    phoneNumber: "",
-    emailAddress: "",
-    // selectAddress: "",
+  const [totalFormData, setTotalFormData] = useState <InnerPersonal>({
+    image: null,
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    middle_name: "",
+    // work_phone: "",
+    email: "",
+    company_address: "",
     role: "",
-    // tribe: "",
+    tribe: "",
+    card_type: '',
   });
-
   const nextStep = () => {
     const validated = handleValidate();
     if (!validated) {
@@ -42,11 +52,7 @@ export function CreateCard({ opened, close }: IModalProps) {
     let allowValidate = false;
     if (active == 0) {
       // do validation for first input which is totalFormData
-      if (
-        !totalFormData.firstName ||
-        !totalFormData.lastName ||
-        !totalFormData.imgValue
-      ) {
+      if (!totalFormData.first_name || !totalFormData.last_name) {
         allowValidate = false;
       } else {
         allowValidate = true;
@@ -55,144 +61,176 @@ export function CreateCard({ opened, close }: IModalProps) {
       // do validation for first input which is totalFormData
     } else if (active == 1) {
       if (
-        !organizationInfo.emailAddress ||
-        !organizationInfo.phoneNumber ||
-        !organizationInfo.role
-        ) {
-        console.log('first')
+        !totalFormData.email ||
+        !totalFormData.phone_number ||
+        !totalFormData.role
+      ) {
+        console.log("first");
         allowValidate = false;
+        toast("fill out all details");
       } else {
         allowValidate = true;
-        console.log('jkl')
+        console.log("jkl");
       }
     }
 
     return allowValidate;
   };
 
-  return (
-    <Modal
-      opened={opened}
-      onClose={close}
-      title="Create Cards"
-      centered
-      className="custom-modal "
-      styles={{
-        root: {},
-        content: {
-          borderRadius: "12px",
-          msOverflowStyle: "-ms-autohiding-scrollbar",
-          overflow: "auto",
-          display: "grid",
-          height: "100%",
-          gridTemplateRows: "auto 1fr",
-        },
-        body: {
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          overflow: "auto",
-          display: "grid",
-          height: "100%",
-          gridTemplateRows: "auto 1fr auto",
-        },
-        title: {
-          color: "#54565B",
-          fontWeight: 500,
-        },
-      }}
-    >
-      {/* Modal content */}
+  const sendDetails = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    const formData = new FormData();
+    Object.entries(totalFormData).forEach(([key, value]) => {
+      formData.append(key, value)
+    });
+    axios({
+      url: "https://web-production-5804.up.railway.app/api/card/expert_cards/create/",
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+      method: "post",
+    })
+      .then(function ({ data }) {
+        close();
+        setShowSuccessModal(true);
+      })
+      .catch(function (error) {});
+  };
 
-      <div className="">
-        <h3 className=" mb-6 leading-4 text-gray text-14">
-          Personal Information
-        </h3>
-      </div>
-      <Stepper
-        allowNextStepsSelect={false}
-        active={active}
-        onStepClick={setActive}
-        breakpoint="sm"
-        color="#C81107"
+  return (
+    <>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Create Cards"
+        centered
+        className="custom-modal "
         styles={{
-          root: {
+          root: {},
+          content: {
+            borderRadius: "12px",
+            msOverflowStyle: "-ms-autohiding-scrollbar",
             overflow: "auto",
             display: "grid",
+            height: "100%",
             gridTemplateRows: "auto 1fr",
           },
-          separator: {
-            backgroundColor: "#EFF0F6",
-            height: "5px",
-            borderRadius: "35px",
-          },
-
-          separatorActive: {
-            backgroundColor: "#C81107",
-          },
-          content: {
+          body: {
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
             overflow: "auto",
+            display: "grid",
+            height: "100%",
+            gridTemplateRows: "auto 1fr auto",
+          },
+          title: {
+            color: "#54565B",
+            fontWeight: 500,
           },
         }}
       >
-        <Stepper.Step completedIcon={<span>1</span>}>
-          <PersonalInfo
-            currentFormData={totalFormData}
-            handleCurrentFormData={seTotalFormData}
-          />
-        </Stepper.Step>
+        {/* Modal content */}
 
-        <Stepper.Step completedIcon={<span>2</span>}>
-          <OrganizationInfo
-            currentFormData={organizationInfo}
-            handleCurrentFormData= {setOrganizationInfo}
-          />
-        
-        </Stepper.Step>
-
-        <Stepper.Step completedIcon={<span>3</span>}>
-          <CardStyle />
-        </Stepper.Step>
-      </Stepper>
-
-      <Group position="center" mt="xl" className="flex justify-between">
-        <Button
-          variant="default"
-          onClick={prevStep}
-          disabled={active < 1 ? true : false}
+        <div className="">
+          <h3 className=" mb-6 leading-4 text-gray text-14">
+            Personal Information
+          </h3>
+        </div>
+        <Stepper
+          allowNextStepsSelect={false}
+          active={active}
+          onStepClick={setActive}
+          breakpoint="sm"
+          color="#C81107"
           styles={{
             root: {
-              background: "white !important",
-              border: "1px solid #B4B4B0 !important",
-              height: "50px",
-              padding: "15px 30px",
-              "&:hover": {
-                background: " !important ",
-              },
+              overflow: "auto",
+              display: "grid",
+              gridTemplateRows: "auto 1fr",
+            },
+            stepIcon: {
+              width: "29.39px",
+              height: "29.39px",
+              minWidth: "29.39px",
+            },
+            separator: {
+              backgroundColor: "#EFF0F6",
+              height: "5px",
+              borderRadius: "35px",
+            },
+
+            separatorActive: {
+              backgroundColor: "#C81107",
+            },
+            content: {
+              overflow: "auto",
             },
           }}
         >
-          Back
-        </Button>
+          <Stepper.Step completedIcon={<span>1</span>}>
+            <PersonalInfo
+              currentFormData={totalFormData}
+              handleCurrentFormData={setTotalFormData}
+            />
+          </Stepper.Step>
 
-        <Button
-          onClick={nextStep}
-          styles={{
-            root: {
-              background: "#C81107 !important",
-              height: "50px",
-              padding: "15px 30px",
-              color: "white",
-              "&:hover": {
-                background: "#6D0802 !important ",
+          <Stepper.Step completedIcon={<span>2</span>}>
+            <OrganizationInfo
+              currentFormData={totalFormData}
+              handleCurrentFormData={setTotalFormData}
+            />
+          </Stepper.Step>
+
+          <Stepper.Step completedIcon={<span>3</span>}>
+            <CardStyle />
+          </Stepper.Step>
+        </Stepper>
+
+        <Group position="center" mt="xl" className="flex justify-between">
+          <Button
+            variant="default"
+            onClick={prevStep}
+            disabled={active < 1 ? true : false}
+            styles={{
+              root: {
+                background: "white !important",
+                border: "1px solid #B4B4B0 !important",
+                height: "50px",
+                padding: "15px 30px",
+                "&:hover": {
+                  background: " !important ",
+                },
               },
-            },
-          }}
-        >
-          {active===2? 'Create' : 'Next'}
-        </Button>
-      </Group>
-    </Modal>
+            }}
+          >
+            Back
+          </Button>
+
+          <Button
+            onClick={active == 2 ? sendDetails : nextStep}
+            styles={{
+              root: {
+                background: "#C81107 !important",
+                height: "50px",
+                padding: "15px 30px",
+                color: "white",
+                "&:hover": {
+                  background: "#6D0802 !important ",
+                },
+              },
+            }}
+          >
+            {active === 2 ? "Create" : "Next"}
+          </Button>
+        </Group>
+      </Modal>
+
+      <CardSuccess
+        fetchData={fetchData}
+        opened={showSuccessModal}
+        close={closesuccess}
+      />
+    </>
   );
 }
-
-// #C81107

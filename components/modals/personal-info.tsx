@@ -10,10 +10,17 @@ interface PersonalInfoProp {
   currentFormData: InnerPersonal;
   handleCurrentFormData: (val: InnerPersonal) => void;
 }
-interface InnerPersonal {
-  imgValue: string;
-  firstName: string;
-  lastName: string;
+export interface InnerPersonal {
+  image: File | null;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  email: string;
+  role: string;
+  tribe: string;
+  company_address: string;
+  middle_name: string;
+  card_type?: string;
 }
 
 const PersonalInfo = ({
@@ -21,14 +28,14 @@ const PersonalInfo = ({
   handleCurrentFormData,
 }: PersonalInfoProp) => {
   const [imgPreview, setImgPreview] = useState("");
-  const [imgSize, setImgSize] = useState("");
+  const [imgSize, setImgSize] = useState(0);
   const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     if (imgPreview) {
       const fileName = imgPreview.split("/").pop() || "";
       // setImgTitle(fileName);
-      }
+    }
   }, [imgPreview]);
 
   return (
@@ -38,12 +45,16 @@ const PersonalInfo = ({
       </h3>
 
       <Dropzone
-        onDrop={(files: any) => {
+        onDrop={(files) => {
           const reader = new FileReader();
+          handleCurrentFormData({
+            ...currentFormData,
+            image: files[0],
+          });
           setFileName(files[0].name);
-          setImgSize((files[0].size));
-          const data =files[0].size;
-          console.log(data/1024)
+          setImgSize(files[0].size);
+          const data = files[0].size;
+          console.log(data / 1024);
           reader.readAsDataURL(files[0]);
 
           reader.onload = () => {
@@ -80,8 +91,10 @@ const PersonalInfo = ({
                 <Image src={imgPreview} alt="" width={150} height={150} />
               </div>
               <div className="flex justify-between items-center gap-4">
-              <span className=" text-davy-grey text-14 ">{fileName}</span>
-              <span className=" text-phillipine-silver text-[10px]">{imgSize}MB Image</span>
+                <span className=" text-davy-grey text-14 ">{fileName}</span>
+                <span className=" text-phillipine-silver text-[10px]">
+                  {imgSize}MB Image
+                </span>
               </div>
             </div>
           ) : (
@@ -128,11 +141,11 @@ const PersonalInfo = ({
       </Dropzone>
 
       <TextInput
-        value={currentFormData.firstName}
+        value={currentFormData.first_name}
         onChange={(e) => {
           handleCurrentFormData({
             ...currentFormData,
-            firstName: e.target.value,
+            first_name: e.target.value,
           });
         }}
         placeholder="Enter first name"
@@ -146,11 +159,11 @@ const PersonalInfo = ({
       />
 
       <TextInput
-        value={currentFormData.lastName}
+        value={currentFormData.last_name}
         onChange={(e) => {
           handleCurrentFormData({
             ...currentFormData,
-            lastName: e.target.value,
+            last_name: e.target.value,
           });
         }}
         placeholder="Enter last name"
@@ -162,6 +175,42 @@ const PersonalInfo = ({
           label: "text-davy-grey text-sm leading-4",
         }}
       />
+
+      <TextInput
+        value={currentFormData.middle_name}
+        onChange={(e) => {
+          handleCurrentFormData({
+            ...currentFormData,
+            middle_name: e.target.value,
+          });
+        }}
+        placeholder="Enter middle name"
+        label="Middle Name"
+        classNames={{
+          root: "flex flex-col gap-5 mt-10 pb-2",
+          input:
+            "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
+          label: "text-davy-grey text-sm leading-4",
+        }}
+      />
+
+      {/* <TextInput
+        value={currentFormData.middle_name}
+        onChange={(e) => {
+          handleCurrentFormData({
+            ...currentFormData,
+            middle_name: e.target.value,
+          });
+        }}
+        placeholder="Enter first name"
+        label="First Name"
+        classNames={{
+          root: "flex flex-col gap-5 mt-10",
+          input:
+            "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
+          label: "text-davy-grey text-sm leading-4",
+        }}
+      /> */}
     </div>
   );
 };

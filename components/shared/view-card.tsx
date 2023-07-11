@@ -6,8 +6,8 @@ import { useDisclosure } from "@mantine/hooks";
 
 
 
-const ViewCard = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+const ViewCard = ({fetchData}:any) => {
+ const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <section className="flex justify-between items-center gap-8">
@@ -51,7 +51,7 @@ const ViewCard = () => {
         New Card
       </Button>
 
-        <CreateCard  opened={opened}  close={close}/>
+        <CreateCard fetchData={fetchData} opened={opened}  close={close}/>
       
     </section>
 

@@ -1,9 +1,30 @@
-import { Table } from "@mantine/core";
+import { Checkbox, Table } from "@mantine/core";
 import Image from "next/image";
 import { data } from "./data";
 import clsx from "clsx";
 
-export function TableData() {
+interface IXperts {
+  address: string;
+  city: string;
+  country: string;
+  created_date: Date;
+  email: string;
+  first_name: string;
+  full_name: string;
+  last_name: string;
+  middle_name: string;
+  phone_number: string;
+  profile_picture: string;
+  qr_code: string;
+  retrieve_update_delete_url: string;
+  role: string;
+  tribe: string;
+  is_active: boolean;
+}
+
+// https://web-production-5804.up.railway.app/api/card/expert_cards/create/
+
+export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
     <tr>
       <th className="flex justify-center">Card</th>
@@ -11,34 +32,38 @@ export function TableData() {
       <th>Email Address</th>
       <th>Designation</th>
       <th>Status</th>
+
     </tr>
   );
 
-  const rows = data.map((item) => (
-    <tr key={item.id}>
-      <td className="flex justify-center ">
-        <div className=" flex justify-center">
-        <Image src={item.card} width={24} height={14.24} alt="cards" style={{
-          width: item.width,
-          height: item.height
-        }}/>
+  const rows = xperts?.map((item, index) => (
+    <tr key={index}>
 
-        </div>
-      </td>
-      <td>{item.xpert}</td>
+      <td className="flex justify-center ">
+          <img
+            src={item.profile_picture}
+            width={24}
+            height={14.24}
+            alt="cards"
+            style={{
+              width: "13.71px",
+              height: "24px",
+            }}
+          />
+        </td>
+      <td>{item.full_name}</td>
       <td>{item.email}</td>
-      <td>{item.designation}</td>
+      <td>{item.role}</td>
       <td className={clsx(" flex items-center")}>
-        {item.status === "Active" ? (
+        {item.is_active ? (
           <div className="bg-[#E7F9F0] flex justify-between items-center p-2 rounded-lg gap-1">
-            {/* circled dot */}
             <div className=" bg-[#0DBF66] w-2 h-2 rounded-full"></div>
-            <span className=" text-[#076D3A]">{item.status}</span>
+            <span className=" text-[#076D3A]">{item.is_active}Active</span>
           </div>
         ) : (
           <div className="bg-[#FDEEEE] flex justify-between items-center p-2 rounded-lg gap-1">
             <div className=" bg-[#ED5556] w-2 h-2 rounded-full  "></div>
-            <span className=" text-[#873031]">{item.status}</span>
+            <span className=" text-[#873031]">{item.is_active}Inactive</span>
           </div>
         )}
       </td>
@@ -46,7 +71,7 @@ export function TableData() {
   ));
 
   return (
-    <div className=" bg-white max-w-[1440px]">
+    <div className=" bg-white max-w-[1440px] flex-1">
       <Table className=" w-[90%] mx-auto">
         <thead>{tableHead}</thead>
         <tbody>{rows}</tbody>

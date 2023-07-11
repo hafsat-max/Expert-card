@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useState, createContext, useEffect } from 're
 
 
 export interface UserDetails  {
-  img: string;
+  profile_picture: string;
   first_name: string;
 }
 

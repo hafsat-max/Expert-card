@@ -1,34 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select, TextInput } from "@mantine/core";
+import { InnerPersonal } from "./personal-info";
+import Link from "next/link";
+import axios from "axios";
 
 interface PersonalInfoProp {
   currentFormData: InnerPersonal;
   handleCurrentFormData: (val: InnerPersonal) => void;
 }
-interface InnerPersonal {
-  phoneNumber: string;
-  emailAddress: string;
-  // selectAddress: string;
-  role: string;
-  // tribe: string;
-}
+
 
 const OrganizationInfo = ({
   currentFormData,
   handleCurrentFormData,
 }: PersonalInfoProp) => {
+
+  const [address, setAddress]= useState([])
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    axios({
+      url: "https://web-production-5804.up.railway.app/api/card/company_address/",
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+    })
+      .then(function ({ data }) {
+        setAddress(data.results.reduce((acc, cur)=>{
+          acc.push({label: cur.company_address, value: cur.id})
+          return acc
+        }, []))
+
+      })
+      .catch(function (error) {});
+     
+    return () => {
+    }
+  }, [])
+  
   return (
     <section>
       {/* Work Phone */}
       <TextInput
-      type="number"
+      type="textc"
         placeholder="Enter Work Phone"
         label="Work Phone"
-        value={currentFormData.phoneNumber}
+        value={currentFormData.phone_number}
         onChange={(e) => {
           handleCurrentFormData({
             ...currentFormData,
-            phoneNumber: e.target.value,
+            phone_number: e.target.value,
           });
         }}
         classNames={{
@@ -48,11 +69,11 @@ const OrganizationInfo = ({
       type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
-        value={currentFormData.emailAddress}
+        value={currentFormData.email}
         onChange={(e) => {
           handleCurrentFormData({
             ...currentFormData,
-            emailAddress: e.target.value,
+            email: e.target.value,
           });
         }}
         classNames={{
@@ -64,14 +85,11 @@ const OrganizationInfo = ({
       />
 
       {/* select address */}
-      {/* <Select
-        searchValue={currentFormData}
-        onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            selectAddress: e.target.value,
-          });
-        }}
+      <Select
+      onChange={(value)=>handleCurrentFormData({
+        ...currentFormData,
+        company_address:value as string,
+      })}
         label={
           <div className="flex justify-between items-center">
             <span className="text-davy-grey text-sm leading-4">
@@ -91,25 +109,10 @@ const OrganizationInfo = ({
             "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
           label: "text-davy-grey text-sm leading-4",
         }}
-        data={[
-          {
-            label:
-              "3rd Floor, Yobe Investment House, Plot 1332, Ralph Shode...",
-            value:
-              "3rd Floor, Yobe Investment House, Plot 1332, Ralph Shodeinde Street, Behind Federal Ministry of Finance, Central Business District, Abuja, Nigeria.",
-          },
-          {
-            label: "Christiana Oyinade House, Beside First Bank, Iwo...",
-            value:
-              "Christiana Oyinade House, Beside First Bank, Iwo road, Ibadan, Oyo state, Nigeria.",
-          },
-          {
-            label: "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi...",
-            value:
-              "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi - Lagos, Lagos State, Nigeria.",
-          },
-        ]}
-      /> */}
+        data={
+          address
+        }
+      />
 
       {/* Role designation */}
       <TextInput
@@ -133,9 +136,14 @@ const OrganizationInfo = ({
       />
 
       {/* tribe/ department */}
-      {/* <Select
+      <Select
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
+        searchValue={currentFormData.tribe}
+        onSearchChange={(value)=>handleCurrentFormData({
+          ...currentFormData,
+          tribe:value,
+        })}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
           input:
@@ -143,23 +151,14 @@ const OrganizationInfo = ({
           label: "text-davy-grey text-sm leading-4",
         }}
         data={[
-          {
-            label: "3rd Floor, Yobe Investment House, Plot 1332, Ralph Sho...",
-            value:
-              "3rd Floor, Yobe Investment House, Plot 1332, Ralph Shodeinde Street, Behind Federal Ministry of Finance, Central Business District, Abuja, Nigeria.",
-          },
-          {
-            label: "Christiana Oyinade House, Beside First Bank, Iwo...",
-            value:
-              "Christiana Oyinade House, Beside First Bank, Iwo road, Ibadan, Oyo state, Nigeria.",
-          },
-          {
-            label: "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi...",
-            value:
-              "Adekunle Lawal Road, Off 2nd Avenue,. Ikoyi - Lagos, Lagos State, Nigeria.",
-          },
+          "Corporate services",
+          'Technology and innovation',
+          'Financial market',
+          'AFIL',
+          'Risk audit and assurance',
+          'Business Assurance'
         ]}
-      /> */}
+      />
     </section>
   );
 };
