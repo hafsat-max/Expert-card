@@ -11,7 +11,7 @@ interface PersonalInfoProp {
   handleCurrentFormData: (val: InnerPersonal) => void;
 }
 export interface InnerPersonal {
-  image: File | null;
+  profile_picture: File | null;
   first_name: string;
   last_name: string;
   phone_number: string;
@@ -49,7 +49,7 @@ const PersonalInfo = ({
           const reader = new FileReader();
           handleCurrentFormData({
             ...currentFormData,
-            image: files[0],
+            profile_picture: files[0],
           });
           setFileName(files[0].name);
           setImgSize(files[0].size);

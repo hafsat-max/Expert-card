@@ -3,11 +3,12 @@ import { Button, Group, Modal, Stepper } from "@mantine/core";
 
 import PersonalInfo, { InnerPersonal } from "./personal-info";
 import OrganizationInfo from "./organization-info";
-import CardStyle from "./card-style";
+// import CardStyle from "./card-style";
 import { CardSuccess } from "./card-success";
 import { useDisclosure } from "@mantine/hooks";
 import { toast } from "react-toastify";
 import axios from "axios";
+import CardStyle from "./card-style";
 
 export interface IModalProps {
   opened: boolean;
@@ -24,7 +25,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
 
   const [active, setActive] = useState(0);
   const [totalFormData, setTotalFormData] = useState <InnerPersonal>({
-    image: null,
+    profile_picture: null,
     first_name: "",
     last_name: "",
     phone_number: "",
@@ -84,7 +85,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
       formData.append(key, value)
     });
     axios({
-      url: "https://web-production-5804.up.railway.app/api/card/expert_cards/create/",
+      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/create/",
       data: formData,
       headers: {
         Authorization: `Bearer ${token.token}`,

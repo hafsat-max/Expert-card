@@ -53,7 +53,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
         </td>
       <td>{item.full_name}</td>
       <td>{item.email}</td>
-      <td>{item.role}</td>
+      <td>{item.role.toLowerCase()}</td>
       <td className={clsx(" flex items-center")}>
         {item.is_active ? (
           <div className="bg-[#E7F9F0] flex justify-between items-center p-2 rounded-lg gap-1">

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import LandingCarousel from "@/components/home/carousel";
 
@@ -9,7 +8,7 @@ import TextSection from "@/components/home/text-section";
 
 const index = () => {
   return (
-    <main className="h-screen flex flex-col ">
+    <main className="h-screen flex flex-col  ">
       <header
         className="h-10 bg-engineering bg-cover bg-center"
         style={{
@@ -19,7 +18,7 @@ const index = () => {
 
       {/*  */}
       <section
-        className=" bg-cover bg-no-repeat bg-top-center flex-1 flex flex-col "
+        className=" bg-cover bg-no-repeat bg-top-center flex-1 flex flex-col relative "
         style={{ backgroundImage: "url('/home/background.png')" }}
       >
         {/* logo header */}
@@ -36,7 +35,12 @@ const index = () => {
             <LandingCarousel />
           </div>
         </section>
+
+        <img src="home/big-circle.svg" className="absolute right-[426px] top-[102px]"/>
+        <img src="home/big-icon.svg" className="absolute right-[555px] bottom-[104px]" />
+        <img src="home/small-circle.svg" className="absolute right-[505px] top-[148px]"/>
       </section>
+
     </main>
   );
 };

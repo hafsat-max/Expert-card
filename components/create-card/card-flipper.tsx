@@ -1,70 +1,71 @@
 import React, { useState } from "react";
 
 const FlippingCard = () => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [flippedCard, setFlippedCard] = useState(null);
 
+  const images = [
+    {
+      id: 1,
+      src1: "/create-card/landscapea1.png",
+      src2: "/create-card/landscapea2.png",
+    },
+    {
+      id: 2,
+      src1: "/create-card/landscapeb1.png",
+      src2: "/create-card/landscapeb2.png",
+    },
+    {
+      id: 3,
+      src1: "/create-card/portraita1.png",
+      src2: "/create-card/portraita2.png",
+    },
+    {
+      id: 4,
+      src1: "/create-card/portraitb1.png",
+      src2: "/create-card/portraitb2.svg",
+    },
+  ];
+
+  const handleCardFlip = (cardId:any) => {
+    if (flippedCard === cardId) {
+      setFlippedCard(null);
+    } else {
+      setFlippedCard(cardId);
+    }
+  };
 
   return (
-    <div
-      className={` rounded-lg  cursor-pointer overflow-hidden c ${
-        isFlipped ? "flipped" : ""
-      }`}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-      style={
-        isFlipped
-          ? {
-              transformStyle: "preserve-3d",
-              transform: "rotateY(-180deg)",
-              animation: "flip-animation 1s linear ",
-              transformOrigin: "center"
-
-            }
-          : {}
-      }
-    >
-      {/* Front side of the card */}
-      {!isFlipped ? (
+    <section className="flex flex-col gap-4 justify-center items-center">
+      {images.map((item) => (
         <div
-          style={{
-            transformStyle: "preserve-3d",
-            transform: "rotateY(180deg)",
-            animation: "flip-animation 1s linear",
-            transformOrigin: "center"
-          }}
-          className="flex p-3 justify-center items-center min-w-[180px]  bg-red-900 text-white border border-gray-700   rounded-lg h-[250px]"
+          key={item.id}
+          className={`rounded-lg cursor-pointer overflow-hidden ${
+            flippedCard === item.id ? "flipped" : ""
+          }`}
+          onMouseEnter={() => handleCardFlip(item.id)}
+          onMouseLeave={() => handleCardFlip(item.id)}
+          style={{ width: "200px",  }}
         >
-          <h1
-            style={isFlipped? { transform: "rotateY(-180deg)" }: { transform: "rotateY(180deg)" }}
-            className=" text-3xl bg-center"
-          >
-            View User
-          </h1>
-        </div>
-      ) : (
-        
-        // user detail
-        <div
-          style={isFlipped?{ transform: "rotateY(180deg)" }: { transform: "rotateY(-180deg)" }}
-          className="flex flex-col min-w-[180px] border border-gray-700 rounded-lg h-[250px]"
-        >
-          <div
-            className="flex-1 h-10 bg-cover bg-no-repeat bg-top-center overflow-hidden "
-            style={{ backgroundImage: "url('/road.jpg')" }}
-          ></div>
+          {/* Front side of the card */}
+          <div className="card-front">
+            <img
+              src={item.src1}
+              alt="Front Side"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-          <div className="flex-1 flex flex-col gap-2 p-[10px]">
-            <h2 className=" font-bold text-2xl text-center whitespace-nowrap">
-              Alabi Adewale
-            </h2>
-            <p className=" text-sm text-center">Back-end Development</p>
-            <p className=" text-sm text-center">ATS 2.0</p>
+          {/* Back side of the card */}
+          <div className="card-back">
+            <img
+              src={item.src2}
+              alt="Back Side"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
-      )}
-      {/* Back side of the card */}
-
-    </div>
+      ))}
+    </section>
   );
 };
 

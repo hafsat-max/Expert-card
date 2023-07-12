@@ -19,7 +19,7 @@ const Homepage = () => {
   const fetchData = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     axios({
-      url: "https://web-production-5804.up.railway.app/api/card/expert_cards/",
+      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/",
       headers: {
         Authorization: `Bearer ${token.token}`,
       },

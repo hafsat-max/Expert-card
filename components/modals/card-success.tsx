@@ -31,7 +31,7 @@ export function CardSuccess({opened, fetchData, close}:any) {
           </h3>
           <p className=" text-davy-grey text-xs text-center ">Xpert Card has been created successfully.</p>
 
-          <Button
+          <Buttonc
           type="submit"
            onClick={() => {
             fetchData()

@@ -20,7 +20,7 @@ const OrganizationInfo = ({
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     axios({
-      url: "https://web-production-5804.up.railway.app/api/card/company_address/",
+      url: "https://web-production-9c5b.up.railway.app/api/card/company_address/",
       headers: {
         Authorization: `Bearer ${token.token}`,
       },
@@ -86,6 +86,7 @@ const OrganizationInfo = ({
 
       {/* select address */}
       <Select
+      value={currentFormData.company_address}
       onChange={(value)=>handleCurrentFormData({
         ...currentFormData,
         company_address:value as string,
@@ -139,8 +140,8 @@ const OrganizationInfo = ({
       <Select
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
-        searchValue={currentFormData.tribe}
-        onSearchChange={(value)=>handleCurrentFormData({
+        value={currentFormData.tribe}
+        onChange={(value)=>handleCurrentFormData({
           ...currentFormData,
           tribe:value,
         })}

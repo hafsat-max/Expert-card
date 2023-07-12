@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const Login = (value: UserProps) => {
     axios
-      .post("https://web-production-5804.up.railway.app/api/account/login/", {
+      .post("https://web-production-9c5b.up.railway.app/api/account/login/", {
         email: value.email,
         password: value.password,
       })
@@ -32,6 +32,8 @@ const LoginForm = () => {
           localStorage.setItem("my-user", JSON.stringify(response.data));
           toast.success("You have successfully logged in");
           router.push("/homepage");
+          setUserDetails({ email: "",
+          password: "",})
         }
       })
       .catch(function (error) {
