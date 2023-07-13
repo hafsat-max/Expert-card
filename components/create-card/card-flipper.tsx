@@ -5,22 +5,22 @@ const FlippingCard = () => {
 
   const images = [
     {
-      id: 1,
+      id: 'landscape1',
       src1: "/create-card/landscapea1.png",
       src2: "/create-card/landscapea2.png",
     },
     {
-      id: 2,
+      id: 'landscape2',
       src1: "/create-card/landscapeb1.png",
       src2: "/create-card/landscapeb2.png",
     },
     {
-      id: 3,
+      id: 'portrait1',
       src1: "/create-card/portraita1.png",
       src2: "/create-card/portraita2.png",
     },
     {
-      id: 4,
+      id: "portrait2",
       src1: "/create-card/portraitb1.png",
       src2: "/create-card/portraitb2.svg",
     },

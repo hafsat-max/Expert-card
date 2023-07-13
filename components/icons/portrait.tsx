@@ -1,42 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Istyle } from "./task";
-import axios from "axios";
 
-const Landscape = ({color, onClick}:Istyle ) => {
-
+const Portrait = ({color, onClick} : Istyle) => {
   return (
     <svg
     onClick={onClick}
-      width="24"
+      width="15"
       height="18"
-      viewBox="0 0 24 18"
+      viewBox="0 0 15 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="0.5" y="0.5" width="23" height="17" rx="2.5" stroke={color} />
+      <rect
+        x="0.5"
+        y="17.5"
+        width="17"
+        height="14"
+        rx="1.75"
+        transform="rotate(-90 0.5 17.5)"
+        stroke={color}
+      />
       <line
-        x1="4.75"
-        y1="4.75"
-        x2="19.25"
-        y2="4.75"
+        x1="3.75"
+        y1="5.25"
+        x2="11.25"
+        y2="5.25"
         stroke={color}
         stroke-width="1.5"
         stroke-linecap="round"
       />
       <line
-        x1="4.75"
+        x1="3.75"
         y1="8.75"
-        x2="13.9167"
+        x2="9.25"
         y2="8.75"
         stroke={color}
         stroke-width="1.5"
         stroke-linecap="round"
       />
       <line
-        x1="4.75"
-        y1="12.75"
-        x2="8.58333"
-        y2="12.75"
+        x1="3.75"
+        y1="12.25"
+        x2="5.25"
+        y2="12.25"
         stroke={color}
         stroke-width="1.5"
         stroke-linecap="round"
@@ -45,4 +51,4 @@ const Landscape = ({color, onClick}:Istyle ) => {
   );
 };
 
-export default Landscape;
+export default Portrait;

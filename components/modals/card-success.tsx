@@ -2,13 +2,14 @@ import { Modal, Button } from "@mantine/core";
 import Image from "next/image";
 import { IModalProps } from "./create-card";
 
-export function CardSuccess({opened, fetchData, close}:any) {
+export function CardSuccess({opened, fetchData, close, handleClose}:any) {
 
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
+        withCloseButton={false}
         centered
         className="flex justify-center items-center flex-col gap-3"
         styles={{
@@ -31,11 +32,10 @@ export function CardSuccess({opened, fetchData, close}:any) {
           </h3>
           <p className=" text-davy-grey text-xs text-center ">Xpert Card has been created successfully.</p>
 
-          <Buttonc
+          <Button
           type="submit"
-           onClick={() => {
+           onClick={()=> {handleClose(false)
             fetchData()
-            close()
           }}
           className="mb-6 self-center px-10"
           styles={{

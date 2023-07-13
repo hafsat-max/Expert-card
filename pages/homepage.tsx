@@ -12,10 +12,18 @@ import Disable from "@/components/icons/disable";
 import NoCards from "@/components/home/no-cards";
 import { TableData } from "@/components/create-card/table";
 import axios from "axios";
+import CardListContainer from "@/components/home/card-list-container";
+import Landscape from "@/components/icons/landscape";
+import LandscapeListContainer from "@/components/home/landscape-list-container";
+import PortraitListContainer from "@/components/home/portrait-list-container";
 
 const Homepage = () => {
   const [xperts, setXperts] = useState([]);
+  const [portraits, setPortraits] = useState([]);
+  const [landscapes, setLandscapes] = useState([]);
+  const [selected, setSelected] = useState(0);
 
+  // Getting the data of users in a table from the endpoint
   const fetchData = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     axios({
@@ -29,11 +37,52 @@ const Homepage = () => {
       })
       .catch(function (error) {});
   };
-
   useEffect(() => {
-    fetchData()
+    fetchData();
     return () => {};
   }, []);
+  // End of table data
+
+  // Portrait cards Endpoint fetching
+  const fetchPortrait = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    axios({
+      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape",
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+    })
+      .then(function ({ data }) {
+        setPortraits(data.results);
+      })
+      .catch(function (error) {});
+  };
+  useEffect(() => {
+    fetchPortrait();
+    return () => {};
+  }, []);
+  // End of portrait endpoint
+
+  // Landscape cards Endpoint fetching
+  const fetchLandscape = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    axios({
+      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape",
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+    })
+      .then(function ({ data }) {
+        console.log(data.results);
+        setLandscapes(data.results);
+      })
+      .catch(function (error) {});
+  };
+  useEffect(() => {
+    fetchLandscape();
+    return () => {};
+  }, []);
+  //End of  Landscape cards Endpoint fetching
 
   return (
     <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen">
@@ -46,12 +95,12 @@ const Homepage = () => {
       <main className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full gap-1 ">
         {/* card listing */}
         <CardListing>
-          <ViewCard fetchData={fetchData}/>
+          <ViewCard fetchData={fetchData} />
         </CardListing>
 
         {/* filter nav */}
         <FilterNav>
-          <FilterIcons />
+          <FilterIcons selected={selected} setSelected={setSelected} />
           <FilterInput />
 
           <div className="flex items-center gap-3">
@@ -74,13 +123,15 @@ const Homepage = () => {
         </FilterNav>
 
         {/* cards display section */}
-        {xperts.length ? (
-          <TableData xperts={xperts} />
-        ) : (
-          <div className="max-w bg-white flex-1 flex justify-center items-center">
-            <NoCards />
-          </div>
-        )}
+        <section className=" flex flex-1 w-full max-w-[1440px] ">
+          {selected === 0 ? (
+            <CardListContainer xperts={xperts} />
+          ) : selected === 1 ? (
+            <LandscapeListContainer landscapes={landscapes} />
+          ) : selected === 2 ? (
+            <PortraitListContainer />
+          ) : null}
+        </section>
       </main>
     </section>
   );

@@ -14,7 +14,7 @@ export interface IModalProps {
   opened: boolean;
   close: () => void;
   closeSecondModal?: () => void;
-  fetchData: () => void;
+  fetchData?: () => void;
 }
 
 export function CreateCard({ opened, fetchData, close }: IModalProps) {
@@ -24,7 +24,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
     useDisclosure(false);
 
   const [active, setActive] = useState(0);
-  const [totalFormData, setTotalFormData] = useState <InnerPersonal>({
+  const [totalFormData, setTotalFormData] = useState<InnerPersonal>({
     profile_picture: null,
     first_name: "",
     last_name: "",
@@ -35,7 +35,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
     company_address: "",
     role: "",
     tribe: "",
-    card_type: '',
+    card_type: "",
   });
   const nextStep = () => {
     const validated = handleValidate();
@@ -71,7 +71,6 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
         toast("fill out all details");
       } else {
         allowValidate = true;
-        console.log("jkl");
       }
     }
 
@@ -82,7 +81,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     const formData = new FormData();
     Object.entries(totalFormData).forEach(([key, value]) => {
-      formData.append(key, value)
+      formData.append(key, value);
     });
     axios({
       url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/create/",
@@ -96,7 +95,10 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
         close();
         setShowSuccessModal(true);
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        toast.error(error.response.data?.message);
+        console.log(error)
+      });
   };
 
   return (
@@ -184,7 +186,10 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
           </Stepper.Step>
 
           <Stepper.Step completedIcon={<span>3</span>}>
-            <CardStyle />
+            <CardStyle
+              currentFormData={totalFormData}
+              handleCurrentFormData={setTotalFormData}
+            />
           </Stepper.Step>
         </Stepper>
 
@@ -231,6 +236,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
         fetchData={fetchData}
         opened={showSuccessModal}
         close={closesuccess}
+        handleClose={setShowSuccessModal}
       />
     </>
   );

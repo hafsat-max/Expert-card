@@ -1,18 +1,27 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button, Group } from "@mantine/core";
 import Image from "next/image";
+import { IModalProps } from "./create-card";
+import router from "next/router";
 
-function Logout() {
-  const [opened, { open, close }] = useDisclosure(false);
+const handleLogout = ()=>  router.push("/login");
 
+
+function Logout({ opened, close }: IModalProps) {
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
+        withCloseButton={false}
         className=" flex flex-col justify-center items-center gap-2"
+        styles={{
+          content: {
+            borderRadius: "20px",
+          },
+        }}
       >
-        <div>
+        <div className="flex flex-col justify-center items-center gap-3">
           <Image
             src={"/logout.svg"}
             width={170}
@@ -27,8 +36,9 @@ function Logout() {
             proceed
           </p>
 
-          <div className=" flex justify-between">
+          <div className=" flex justify-between items-center gap-10 mt-[25px]">
             <Button
+              onClick={close}
               type="submit"
               className="mb-6 self-center px-10"
               styles={{
@@ -46,6 +56,7 @@ function Logout() {
             </Button>
 
             <Button
+            onClick={handleLogout}
               type="submit"
               className="mb-6 self-center px-10"
               styles={{
@@ -64,10 +75,6 @@ function Logout() {
           </div>
         </div>
       </Modal>
-
-      <Group position="center">
-        <Button onClick={open}>Open modal</Button>
-      </Group>
     </>
   );
 }

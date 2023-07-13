@@ -6,7 +6,7 @@ import { IconUpload, IconX } from "@tabler/icons-react";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import Link from "next/link";
 
-interface PersonalInfoProp {
+export interface PersonalInfoProp {
   currentFormData: InnerPersonal;
   handleCurrentFormData: (val: InnerPersonal) => void;
 }
@@ -20,7 +20,7 @@ export interface InnerPersonal {
   tribe: string;
   company_address: string;
   middle_name: string;
-  card_type?: string;
+  card_type: string;
 }
 
 const PersonalInfo = ({
@@ -34,7 +34,6 @@ const PersonalInfo = ({
   useEffect(() => {
     if (imgPreview) {
       const fileName = imgPreview.split("/").pop() || "";
-      // setImgTitle(fileName);
     }
   }, [imgPreview]);
 

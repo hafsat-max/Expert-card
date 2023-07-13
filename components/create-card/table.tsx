@@ -3,11 +3,12 @@ import Image from "next/image";
 import { data } from "./data";
 import clsx from "clsx";
 
-interface IXperts {
+export interface IXperts {
   address: string;
   city: string;
   country: string;
   created_date: Date;
+  card_type: string;
   email: string;
   first_name: string;
   full_name: string;
@@ -22,7 +23,6 @@ interface IXperts {
   is_active: boolean;
 }
 
-// https://web-production-5804.up.railway.app/api/card/expert_cards/create/
 
 export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
@@ -71,7 +71,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
   ));
 
   return (
-    <div className=" bg-white max-w-[1440px] flex-1">
+    <div className=" bg-white max-w-[1440px] flex-1 ">
       <Table className=" w-[90%] mx-auto">
         <thead>{tableHead}</thead>
         <tbody>{rows}</tbody>

@@ -1,13 +1,17 @@
 import React from "react";
 
-interface Istyle {
+export interface Istyle {
   color: string;
+  onClick?: ()=>void
  
 }
 
-const Task = ({ color }: Istyle) => {
+
+
+const Task = ({ color, onClick }: Istyle) => {
   return (
     <svg
+    onClick={onClick}
       width="28"
       height="28"
       viewBox="0 0 28 28"
