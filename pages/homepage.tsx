@@ -16,12 +16,14 @@ import CardListContainer from "@/components/home/card-list-container";
 import Landscape from "@/components/icons/landscape";
 import LandscapeListContainer from "@/components/home/landscape-list-container";
 import PortraitListContainer from "@/components/home/portrait-list-container";
+import RightFilterIcons from "@/components/shared/rightfilter-icon";
 
 const Homepage = () => {
   const [xperts, setXperts] = useState([]);
   const [portraits, setPortraits] = useState([]);
   const [landscapes, setLandscapes] = useState([]);
   const [selected, setSelected] = useState(0);
+  const [icons, setIcons]=useState(0)
 
   // Getting the data of users in a table from the endpoint
   const fetchData = () => {
@@ -47,13 +49,14 @@ const Homepage = () => {
   const fetchPortrait = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     axios({
-      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape",
+      url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=portrait",
       headers: {
         Authorization: `Bearer ${token.token}`,
       },
     })
       .then(function ({ data }) {
         setPortraits(data.results);
+        console.log(data.results.profile_picture);
       })
       .catch(function (error) {});
   };
@@ -73,7 +76,6 @@ const Homepage = () => {
       },
     })
       .then(function ({ data }) {
-        console.log(data.results);
         setLandscapes(data.results);
       })
       .catch(function (error) {});
@@ -103,33 +105,17 @@ const Homepage = () => {
           <FilterIcons selected={selected} setSelected={setSelected} />
           <FilterInput />
 
-          <div className="flex items-center gap-3">
-            <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-              <Edit2 size="20" color="#C9C8C6" className="font-bold" />
-            </div>
-
-            <div className=" flex justify-center items-center rounded-full   border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-              <LogoutCurve
-                size="22"
-                color="#C9C8C6"
-                className=" rotate-[-90deg]"
-              />
-            </div>
-
-            <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-              <Disable />
-            </div>
-          </div>
+          <RightFilterIcons  selected={icons} setSelected={setIcons}/>
         </FilterNav>
 
         {/* cards display section */}
-        <section className=" flex flex-1 w-full max-w-[1440px] ">
+        <section className=" flex flex-1 w-full max-w-[1440px]">
           {selected === 0 ? (
             <CardListContainer xperts={xperts} />
           ) : selected === 1 ? (
             <LandscapeListContainer landscapes={landscapes} />
           ) : selected === 2 ? (
-            <PortraitListContainer />
+            <PortraitListContainer portraits={portraits} />
           ) : null}
         </section>
       </main>
@@ -138,3 +124,22 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+
+// <div className="flex items-center gap-3">
+// <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
+//   <Edit2 size="20" color="#C9C8C6" className="font-bold" />
+// </div>
+
+// <div className=" flex justify-center items-center rounded-full   border-2 border-[#F2F2F2] w-[40px] h-[40px]">
+//   <LogoutCurve
+//     size="22"
+//     color="#C9C8C6"
+//     className=" rotate-[-90deg]"
+//   />
+// </div>
+
+// <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
+//   <Disable />
+// </div>
+// </div>

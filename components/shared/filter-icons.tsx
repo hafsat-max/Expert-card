@@ -21,14 +21,17 @@ const FilterIcons = ({selected, setSelected}:IStates) => {
   return (
     <section className=" flex items-center gap-4 border border-[#F5F6F7] p-3 rounded-[100px] cursor-pointer">
       {list.map((Item, index) => (
-        <Item
-          color={selected === index ? "#C81107" : "#9FA19C"}
-          onClick={() => setSelected(index)}
-        />
+        <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
+
+          <Item
+            color={selected === index ? "#C81107" : "#9FA19C"}
+            onClick={() => setSelected(index)}
+          />
+        </div>
       ))}
     </section>
   );
 };
 
 export default FilterIcons;
-// ""
+

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Istyle } from "./task";
-import axios from "axios";
 
 const Landscape = ({color, onClick}:Istyle ) => {
 

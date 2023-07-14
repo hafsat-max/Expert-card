@@ -14,7 +14,7 @@ export function CardSuccess({opened, fetchData, close, handleClose}:any) {
         className="flex justify-center items-center flex-col gap-3"
         styles={{
           root: {
-            borderRadius: '1.25rem'
+            borderRadius: '20px'
           }
         }}
       >

@@ -21,6 +21,7 @@ export interface InnerPersonal {
   company_address: string;
   middle_name: string;
   card_type: string;
+  
 }
 
 const PersonalInfo = ({
