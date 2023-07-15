@@ -41,7 +41,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
 
       <td className="flex justify-center ">
           <img
-            src={item.card_type === 'portraita1' ? '/create-card/portraita1.png'  : item.card_type ==='portraita2'? '/create-card/portraita2.png': item.card_type === 'landscapa1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
+            src={item.card_type === 'Portrait1' ? '/create-card/portraita1.png'  : item.card_type ==='Portrait2'? '/create-card/portraita2.png': item.card_type === 'Landscape1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
             width={24}
             height={14.24}
             alt="cards"

@@ -8,8 +8,8 @@ import {
   createContext,
   useEffect,
 } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export interface UserDetails {
   profile_picture: string;
@@ -21,25 +21,30 @@ export type ContextType = {
   setUser: Dispatch<SetStateAction<UserDetails | null>>;
   selectedCard: number[];
   setSelectedCard: Dispatch<SetStateAction<number[]>>;
+  savedEmail: string;
+  setSavedEmail: (val: string) => void;
 };
 
 export const AuthContext = createContext<ContextType | null>(null);
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<UserDetails | null>(null);
-  const [selectedCard, setSelectedCard] = useState<number[]>([])
+  const [selectedCard, setSelectedCard] = useState<number[]>([]);
+  const [savedEmail, setSavedEmail] = useState("");
 
   let storeData = {
     user,
     setUser,
     selectedCard,
-    setSelectedCard
+    setSelectedCard,
+    savedEmail,
+    setSavedEmail,
   };
 
   return (
     <AuthContext.Provider value={storeData}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <ToastContainer/> 
+        <ToastContainer />
         <Component {...pageProps} />
       </MantineProvider>
     </AuthContext.Provider>

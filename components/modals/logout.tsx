@@ -4,8 +4,10 @@ import Image from "next/image";
 import { IModalProps } from "./create-card";
 import router from "next/router";
 
-const handleLogout = ()=>  router.push("/login");
-
+const handleLogout = ()=> {
+localStorage.clear()
+router.push("/login");
+}
 
 function Logout({ opened, close }: IModalProps) {
   return (

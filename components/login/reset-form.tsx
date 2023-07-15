@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import clsx from "clsx";
 import { Button } from "@mantine/core";
 import Link from "next/link";
@@ -8,31 +8,37 @@ import Heading from "../shared/heading";
 import Paragraph from "../shared/paragraph";
 import axios from "axios";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import router from "next/router";
+import { AuthContext } from "@/pages/_app";
 
-
-interface IEmail{
-  email: string
-  handleReset?:React.MouseEvent<HTMLButtonElement>
+interface IEmail {
+  email: string;
+  handleReset?: React.MouseEvent<HTMLButtonElement>;
 }
 const ResetForm = () => {
-  const [email, setEmail] = useState<IEmail>({email: ''});
+  const auth_ = useContext(AuthContext);
+
+  const [email, setEmail] = useState<IEmail>({ email: "" });
 
   const handleReset = (value: React.MouseEvent<HTMLButtonElement>) => {
-    value.preventDefault()
-    
-    axios.post(
-      "https://web-production-9c5b.up.railway.app/api/account/forgot_password/",
-      {
-        email: email.email,
-      }
-    ).then(function({data}){
-      toast.success(data.message)
-      router.push("/authentication");      
-    }).catch(function(error){
-      toast.error(error)
-    })
+    value.preventDefault();
+
+    axios
+      .post(
+        "https://web-production-9c5b.up.railway.app/api/account/forgot_password/",
+        {
+          email: email.email,
+        }
+      )
+      .then(function ({ data }) {
+        auth_?.setSavedEmail(email.email);
+        toast.success(data.message);
+        router.push("/authentication");
+      })
+      .catch(function (error) {
+        toast.error(error);
+      });
   };
 
   return (
@@ -58,9 +64,7 @@ const ResetForm = () => {
           />
 
           {/* form */}
-          <form
-            className={clsx("pt-10 flex flex-col gap-6")}
-          >
+          <form className={clsx("pt-10 flex flex-col gap-6")}>
             {/* Email */}
             <fieldset className="flex flex-col ">
               <input
@@ -70,9 +74,9 @@ const ResetForm = () => {
                 onChange={(e) =>
                   setEmail({
                     ...email,
-                    email: e.target.value
+                    email: e.target.value,
                   })
-                } 
+                }
                 placeholder="Enter email address"
                 required
                 className={clsx(
@@ -114,7 +118,10 @@ const ResetForm = () => {
                 height={12.79}
                 alt="arrow left"
               />
-              <Paragraph text="Back to Sign In" style="text-davy-grey hover:text-engineering" />
+              <Paragraph
+                text="Back to Sign In"
+                style="text-davy-grey hover:text-engineering"
+              />
             </Link>
           </form>
         </div>

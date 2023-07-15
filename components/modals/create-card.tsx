@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { Button, Group, Modal, Stepper } from "@mantine/core";
 import axios from "axios";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { useDisclosure } from "@mantine/hooks";
 
 import PersonalInfo, { InnerPersonal } from "./personal-info";
@@ -16,6 +16,7 @@ export interface IModalProps {
   closeSecondModal?: () => void;
   fetchData?: () => void;
   editId?: number;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
@@ -23,6 +24,19 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
 
   const [successOpened, { open: opensuccess, close: closesuccess }] =
     useDisclosure(false);
+
+  const [prefillData, setPrefillData] = useState<InnerPersonal>({
+    profile_picture: null,
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    middle_name: "",
+    email: "",
+    company_address: "",
+    role: "",
+    tribe: "",
+    card_type: "",
+  });
 
   const [active, setActive] = useState(0);
   const [totalFormData, setTotalFormData] = useState<InnerPersonal>({
@@ -54,7 +68,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
     if (active == 0) {
       // do validation for first input which is totalFormData
       if (!totalFormData.first_name || !totalFormData.last_name) {
-        toast.error('Fill out all required details.')
+        toast.error("Fill out all required details.");
         allowValidate = false;
       } else {
         allowValidate = true;
@@ -69,7 +83,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
       ) {
         console.log("first");
         allowValidate = false;
-        toast.error('Fill out all required details.')
+        toast.error("Fill out all required details.");
       } else {
         allowValidate = true;
       }
@@ -89,33 +103,38 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
           Authorization: `Bearer ${token.token}`,
         },
       });
-      const {first_name, last_name, phone_number, middle_name, email, company_address, role, tribe, card_type, profile_picture} = response.data;
+      const {
+        first_name,
+        last_name,
+        phone_number,
+        middle_name,
+        email,
+        company_address,
+        role,
+        tribe,
+        card_type,
+        profile_picture,
+      } = response.data;
+      setPrefillData(response?.data);
       setTotalFormData({
-        first_name, last_name, phone_number, middle_name, email, company_address, role, tribe, card_type, profile_picture
-      })
-      toast.success('Card created sucessfully')
-      setTotalFormData({
-        profile_picture: null,
-        first_name: "",
-        last_name: "",
-        phone_number: "",
-        middle_name: "",
-        email: "",
-        company_address: "",
-        role: "",
-        tribe: "",
-        card_type: "",
-      })
+        first_name,
+        last_name,
+        phone_number,
+        middle_name,
+        email,
+        company_address,
+        role,
+        tribe,
+        card_type,
+        profile_picture,
+      });
     } catch (error) {
-      console.log(error)
-      toast.error(error?.response?.data.message)
-
-    }     
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    if (editId)
-    getUserDetails(editId);
+    if (editId) getUserDetails(editId);
   }, [editId]);
 
   const sendDetails = () => {
@@ -131,6 +150,31 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
         Authorization: `Bearer ${token.token}`,
       },
       method: "post",
+    })
+      .then(function ({ data }) {
+        close();
+        setShowSuccessModal(true);
+      })
+      .catch(function (error) {
+        toast.error(error.response.data?.message);
+        console.log(error);
+      });
+  };
+
+  const updatDetails = (id: number) => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    const formData = new FormData();
+    console.log(prefillData);
+    Object.entries(totalFormData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    axios({
+      url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${id}/`,
+      data: prefillData,
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+      method: "put",
     })
       .then(function ({ data }) {
         close();
@@ -216,6 +260,9 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             <PersonalInfo
               currentFormData={totalFormData}
               handleCurrentFormData={setTotalFormData}
+              prefillData={prefillData}
+              setPrefillData={setPrefillData}
+              editId={editId}
             />
           </Stepper.Step>
 
@@ -223,6 +270,9 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             <OrganizationInfo
               currentFormData={totalFormData}
               handleCurrentFormData={setTotalFormData}
+              prefillData={prefillData}
+              setPrefillData={setPrefillData}
+              editId={editId}
             />
           </Stepper.Step>
 
@@ -230,6 +280,9 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             <CardStyle
               currentFormData={totalFormData}
               handleCurrentFormData={setTotalFormData}
+              prefillData={prefillData}
+              setPrefillData={setPrefillData}
+              editId={editId}
             />
           </Stepper.Step>
         </Stepper>
@@ -255,7 +308,14 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
           </Button>
 
           <Button
-            onClick={active == 2 ? sendDetails : nextStep}
+            onClick={() => {
+              console.log(active, "adkadfdfj");
+              active == 2
+                ? editId
+                  ? updatDetails(editId)
+                  : sendDetails
+                : nextStep();
+            }}
             styles={{
               root: {
                 background: "#C81107 !important",
@@ -268,7 +328,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
               },
             }}
           >
-            {active === 2 ? (editId?'Save' : "Create") : "Next"}
+            {active === 2 ? (editId ? "Save" : "Create") : "Next"}
           </Button>
         </Group>
       </Modal>

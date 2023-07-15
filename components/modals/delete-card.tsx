@@ -5,26 +5,32 @@ import Image from "next/image";
 import { IModalProps } from "./create-card";
 import axios from "axios";
 
+interface DeleteCardsProps extends IModalProps {
+  expert_id: number;
+}
 
-const handleDelete=()=>{
-  const token = JSON.parse(localStorage.getItem("my-user") as string);
-  axios ({
-    url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/{expert_id}/`,
-    headers: {
-      Authorization: `Bearer ${token.token}`,
-      
-    },
+function DeleteCard({ opened, close, expert_id }: DeleteCardsProps) {
+  const handleDelete = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    // axios.delete()
+    axios
+      .delete(
+        `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${expert_id}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token.token}`,
+          },
+        }
+      )
+      .then(function (response) {
+        const data = response.data;
+        // Do something with the data
+      })
+      .catch(function (error) {
+        // Handle the error
+      });
+  };
 
-  })
-    .then(function ({ data }) {
-      
-    })
-    .catch(function (error) {});
-
-} 
-
-
-function DeleteCard({ opened, close }: IModalProps) {
   return (
     <>
       <Modal
@@ -47,10 +53,11 @@ function DeleteCard({ opened, close }: IModalProps) {
             alt="logout image"
           />
           <p className="font-bold text-base text-center text-davy-grey">
-          Delete Xpert Card?
+            Delete Xpert Card?
           </p>
           <p className=" text-xs  text-davy-grey text-center max-w-[390px]">
-            You are about to delete the selected Card. Click the delete button below if you would like to continue?
+            You are about to delete the selected Card. Click the delete button
+            below if you would like to continue?
           </p>
 
           <div className=" flex justify-between items-center gap-10 mt-[25px]">
@@ -60,12 +67,11 @@ function DeleteCard({ opened, close }: IModalProps) {
               className="mb-6 self-center px-10 rounded-lg text-[#54565B]"
               styles={{
                 root: {
-                  background:
-                    "white",
-                    border:'1px solid #8B908B',
+                  background: "white",
+                  border: "1px solid #8B908B",
                   height: "50px",
                   "&:hover": {
-                    background: 'white'
+                    background: "white",
                   },
                 },
               }}
@@ -74,7 +80,7 @@ function DeleteCard({ opened, close }: IModalProps) {
             </Button>
 
             <Button
-            onClick={handleDelete}
+              onClick={handleDelete}
               type="submit"
               className="mb-6 self-center px-10"
               styles={{

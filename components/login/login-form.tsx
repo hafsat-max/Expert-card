@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import { Button, PasswordInput } from "@mantine/core";
+import { Button, LoadingOverlay, Loader, PasswordInput } from "@mantine/core";
 import Link from "next/link";
 import axios from "axios";
 import router from "next/router";
@@ -16,20 +16,25 @@ interface UserProps {
 
 const LoginForm = () => {
 
+  const [loader, setLoader] = useState(false)
+  
   const Login = (value: UserProps) => {
+    setLoader(true)
     axios
       .post("https://web-production-9c5b.up.railway.app/api/account/login/", {
         email: value.email,
         password: value.password,
       })
       .then(function (response) {
+        setLoader(false)
         const token = JSON.parse(localStorage.getItem("my-user") as string);
         console.log(response.data.profile_picture)
 
         if (response.data?.token) {
           localStorage.setItem("my-user", JSON.stringify(response.data));
-          toast.success("You have successfully logged in");
+          toast.success("You have successfully logged in",);
           router.push("/homepage");
+          
           setUserDetails({ email: "",
           password: "",})
         }
@@ -37,7 +42,9 @@ const LoginForm = () => {
       .catch(function (error) {
         console.log(error);
         toast.error("Invalid login credentials or not a verified user");
+        setLoader(true)
       });
+      
   };
 
   const [userDetails, setUserDetails] = useState<UserProps>({
@@ -155,7 +162,9 @@ const LoginForm = () => {
         >
           Sign in
         </Button>
+
       </form>
+
     </section>
   );
 };

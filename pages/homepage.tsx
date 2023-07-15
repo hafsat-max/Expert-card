@@ -14,6 +14,7 @@ import LandscapeListContainer from "@/components/home/landscape-list-container";
 import PortraitListContainer from "@/components/home/portrait-list-container";
 import RightFilterIcons from "@/components/shared/rightfilter-icon";
 import { table } from "console";
+import withAuth from "@/components/protected-route";
 
 const Homepage = () => {
   const [xperts, setXperts] = useState([]);
@@ -91,17 +92,23 @@ const Homepage = () => {
   //End of  Landscape cards Endpoint fetching
 
   // filter for specific cards
-  const handleFilter = () => {
+  const handleFilter = (val_: string) => {
+    console.log(val_);
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     console.log(query.tableQuery, "queries");
     let apiString = "";
     if (selected === 0) {
-      console.log(query.tableQuery, 'table')
-      apiString =query.tableQuery?`https://web-production-9c5b.up.railway.app/api/card/expert_cards/?search=${query.tableQuery}`: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/"
+      apiString = val_
+        ? `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?search=${val_}`
+        : "https://web-production-9c5b.up.railway.app/api/card/expert_cards/";
     } else if (selected === 1) {
-      apiString = `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape&search=${query.landscapeQuery}`;
+      apiString = val_
+        ? `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape&search=${val_}`
+        : "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape";
     } else {
-      apiString = `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?portrait&search=${query.portraitQuery}`;
+      apiString = val_
+        ? `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?portrait&search=${val_}`
+        : "https://web-production-9c5b.up.railway.app/api/card/expert_cards/?portrait";
     }
 
     axios({
@@ -111,6 +118,7 @@ const Homepage = () => {
       },
     })
       .then(function ({ data }) {
+        console.log(data, "data value");
         selected === 0
           ? setXperts(data.results)
           : selected === 1
@@ -123,7 +131,6 @@ const Homepage = () => {
   };
 
   // https://web-production-9c5b.up.railway.app/api/card/expert_cards/
-  
 
   return (
     <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen">
@@ -169,4 +176,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default withAuth(Homepage);

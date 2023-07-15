@@ -1,5 +1,5 @@
 import { TextInput } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { IStates } from "./filter-icons";
 import axios from "axios";
@@ -14,7 +14,7 @@ interface IFilterState {
   filter: string;
   selected?: number;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
-  handleFilter: () => void;
+  handleFilter: (val: string) => void;
   query: IQuery;
   setQuery: (val: IQuery) => void;
 }
@@ -27,8 +27,9 @@ const FilterInput = ({
   query,
   setQuery,
 }: IFilterState) => {
+  const [queryV, setQueryV] = useState("");
   return (
-    <div className="flex w-[clamp(400px,37%,300px)] h-[60px] border border-[#EBEBEB] rounded-xl ">
+    <div className="flex w-[clamp(400px,37%,px)] h-[60px] border border-[#EBEBEB] rounded-xl ">
       <TextInput
         className="flex-1 self-center"
         value={
@@ -36,28 +37,30 @@ const FilterInput = ({
             ? query.tableQuery
             : selected === 1
             ? query.landscapeQuery
-            : query.portraitQuery
+            : selected === 2
+            ? query.portraitQuery
+            : ""
         }
         onChange={(e) => {
-          console.log(e.target.value, 'value')
           if (selected === 0) {
             setQuery({
               ...query,
               tableQuery: e.target.value,
-            })
-            if(!e.target.value){
-              handleFilter()
-            }
+            });
+
+            handleFilter(e.target.value);
           } else if (selected === 1) {
             setQuery({
               ...query,
               landscapeQuery: e.target.value,
             });
+            handleFilter(e.target.value);
           } else {
             setQuery({
               ...query,
               portraitQuery: e.target.value,
             });
+            handleFilter(e.target.value);
           }
         }}
         placeholder="Search by Xpert Name / Phone Number / E-mail"
@@ -83,7 +86,7 @@ const FilterInput = ({
 
       <div
         className="flex justify-center items-center gap-3 bg-engineering hover:bg-blood-red text-white px-[26px] rounded-tr-xl rounded-br-xl cursor-pointer"
-        onClick={() => handleFilter()}
+        // onClick={() => handleFilter()}
       >
         <Image src={"/shared/filter.svg"} width={16} height={16} alt="filter" />
         <span>Filter</span>

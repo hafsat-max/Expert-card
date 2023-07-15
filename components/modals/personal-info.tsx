@@ -9,9 +9,12 @@ import Link from "next/link";
 export interface PersonalInfoProp {
   currentFormData: InnerPersonal;
   handleCurrentFormData: (val: InnerPersonal) => void;
+  prefillData?: InnerPersonal;
+  editId?: number | undefined;
+  setPrefillData?: (val: InnerPersonal) => void;
 }
 export interface InnerPersonal {
-  profile_picture: File | null;
+  profile_picture: File | null | undefined;
   first_name: string;
   last_name: string;
   phone_number: string;
@@ -21,12 +24,13 @@ export interface InnerPersonal {
   company_address: string;
   middle_name: string;
   card_type: string;
-  
 }
-
 const PersonalInfo = ({
   currentFormData,
   handleCurrentFormData,
+  prefillData,
+  setPrefillData,
+  editId,
 }: PersonalInfoProp) => {
   const [imgPreview, setImgPreview] = useState("");
   const [imgSize, setImgSize] = useState(0);
@@ -47,10 +51,15 @@ const PersonalInfo = ({
       <Dropzone
         onDrop={(files) => {
           const reader = new FileReader();
-          handleCurrentFormData({
-            ...currentFormData,
-            profile_picture: files[0],
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                profile_picture: files[0],
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                profile_picture: files[0],
+              });
           setFileName(files[0].name);
           setImgSize(files[0].size);
           const data = files[0].size;
@@ -141,13 +150,20 @@ const PersonalInfo = ({
       </Dropzone>
 
       <TextInput
-        value={currentFormData.first_name}
+        value={editId ? prefillData?.first_name : currentFormData.first_name}
         onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            first_name: e.target.value,
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                first_name: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                first_name: e.target.value,
+              });
         }}
+        disabled={false}
+        readOnly={false}
         placeholder="Enter first name"
         label="First Name"
         classNames={{
@@ -159,12 +175,17 @@ const PersonalInfo = ({
       />
 
       <TextInput
-        value={currentFormData.last_name}
+        value={editId ? prefillData?.last_name : currentFormData.last_name}
         onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            last_name: e.target.value,
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                last_name: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                last_name: e.target.value,
+              });
         }}
         placeholder="Enter last name"
         label="Last Name"
@@ -177,12 +198,17 @@ const PersonalInfo = ({
       />
 
       <TextInput
-        value={currentFormData.middle_name}
+        value={editId ? prefillData?.middle_name : currentFormData.middle_name}
         onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            middle_name: e.target.value,
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                middle_name: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                middle_name: e.target.value,
+              });
         }}
         placeholder="Enter middle name"
         label="Middle Name"
@@ -193,7 +219,6 @@ const PersonalInfo = ({
           label: "text-davy-grey text-sm leading-4",
         }}
       />
-
     </div>
   );
 };

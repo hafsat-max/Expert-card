@@ -12,7 +12,7 @@ const withAuth = (WrappedComponent) => {
       const checkAuth = () => {
         const user = JSON.parse(localStorage.getItem("my-user"));
         if (!user) {
-          router.push("/signin"); // Redirect to login page if not authenticated
+          router.push("/login"); // Redirect to login page if not authenticated
         } else {
         }
         setUserObject(user);

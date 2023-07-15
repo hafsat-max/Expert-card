@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Select, TextInput } from "@mantine/core";
-import { InnerPersonal } from "./personal-info";
+import { InnerPersonal, PersonalInfoProp } from "./personal-info";
 import Link from "next/link";
 import axios from "axios";
 
-interface PersonalInfoProp {
-  currentFormData: InnerPersonal;
-  handleCurrentFormData: (val: InnerPersonal) => void;
-}
+// interface PersonalInfoProp {
+//   currentFormData: InnerPersonal;
+//   handleCurrentFormData: (val: InnerPersonal) => void;
 
+// }
 
 const OrganizationInfo = ({
   currentFormData,
   handleCurrentFormData,
+  prefillData,
+  setPrefillData,
+  editId,
 }: PersonalInfoProp) => {
-
-  const [address, setAddress]= useState([])
+  const [address, setAddress] = useState([]);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
@@ -26,31 +28,38 @@ const OrganizationInfo = ({
       },
     })
       .then(function ({ data }) {
-        setAddress(data.results.reduce((acc, cur)=>{
-          acc.push({label: cur.company_address, value: cur.id})
-          return acc
-        }, []))
-
+        setAddress(
+          data.results.reduce((acc, cur) => {
+            acc.push({ label: cur.company_address, value: cur.id });
+            return acc;
+          }, [])
+        );
       })
       .catch(function (error) {});
-     
-    return () => {
-    }
-  }, [])
-  
+
+    return () => {};
+  }, []);
+
   return (
     <section>
       {/* Work Phone */}
       <TextInput
-      type="textc"
+        type="textc"
         placeholder="Enter Work Phone"
         label="Work Phone"
-        value={currentFormData.phone_number}
+        value={
+          editId ? prefillData?.phone_number : currentFormData.phone_number
+        }
         onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            phone_number: e.target.value,
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                phone_number: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                phone_number: e.target.value,
+              });
         }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
@@ -66,15 +75,20 @@ const OrganizationInfo = ({
       />
 
       <TextInput
-      type="email"
+        type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
-        value={currentFormData.email}
+        value={editId ? prefillData?.email : currentFormData.email}
         onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            email: e.target.value,
-          });
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                email: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                email: e.target.value,
+              });
         }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
@@ -86,11 +100,22 @@ const OrganizationInfo = ({
 
       {/* select address */}
       <Select
-      value={currentFormData.company_address}
-      onChange={(value)=>handleCurrentFormData({
-        ...currentFormData,
-        company_address:value as string,
-      })}
+        value={
+          editId
+            ? prefillData?.company_address
+            : currentFormData.company_address
+        }
+        onChange={(value) => {
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                company_address: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                company_address: value as string,
+              });
+        }}
         label={
           <div className="flex justify-between items-center">
             <span className="text-davy-grey text-sm leading-4">
@@ -110,22 +135,24 @@ const OrganizationInfo = ({
             "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
           label: "text-davy-grey text-sm leading-4",
         }}
-        data={
-          address
-        }
+        data={address}
       />
 
       {/* Role designation */}
       <TextInput
-      type="text"
-      value={currentFormData.role}
-
-      onChange={(e) => {
-        handleCurrentFormData({
-          ...currentFormData,
-          role: e.target.value,
-        })
-      }}
+        type="text"
+        value={editId ? prefillData?.role : currentFormData.role}
+        onChange={(e) => {
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                role: e.target.value,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                role: e.target.value,
+              });
+        }}
         placeholder=" Enter Role / Designation"
         label="Role / Designation"
         classNames={{
@@ -140,11 +167,18 @@ const OrganizationInfo = ({
       <Select
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
-        value={currentFormData.tribe}
-        onChange={(value)=>handleCurrentFormData({
-          ...currentFormData,
-          tribe:value,
-        })}
+        value={editId ? prefillData?.tribe : currentFormData.tribe}
+        onChange={(value) =>
+          editId
+            ? setPrefillData({
+                ...prefillData,
+                tribe: value as string,
+              })
+            : handleCurrentFormData({
+                ...currentFormData,
+                tribe: value as string,
+              })
+        }
         classNames={{
           root: "flex flex-col gap-5 mt-10",
           input:
@@ -153,11 +187,11 @@ const OrganizationInfo = ({
         }}
         data={[
           "Corporate services",
-          'Technology and innovation',
-          'Financial market',
-          'AFIL',
-          'Risk audit and assurance',
-          'Business Assurance'
+          "Technology and innovation",
+          "Financial market",
+          "AFIL",
+          "Risk audit and assurance",
+          "Business Assurance",
         ]}
       />
     </section>

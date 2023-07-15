@@ -6,9 +6,30 @@ import Image from "next/image";
 
 import Heading from "../shared/heading";
 import Paragraph from "../shared/paragraph";
+import router from "next/router";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 
 const AuthenticationForm = () => {
-  const [email, setEmail] = useState("");
+  const [verification_code, setPin] = useState('');
+
+  const verifyCode = () => {
+    axios
+      .post(
+        "https://web-production-9c5b.up.railway.app/api/account/verify_verification_code/",
+        {
+          verification_code
+        }
+      )
+      .then(function ({ data }) {
+        console.log(data)
+        router.push("/reset-password");
+      })
+      .catch(function (error) {
+        toast.error(error?.response.data.message)
+      });
+  };
 
   return (
     <section
@@ -41,43 +62,50 @@ const AuthenticationForm = () => {
           >
             <Group position="center">
               <PinInput
-              type="number"
-              placeholder='0'
+                value={verification_code}
+                onChange={(e) => {
+                  setPin(e);
+                }}
+                type="number"
+                placeholder="0"
                 styles={{
-                  input:{
+                  input: {
                     fontWeight: 700,
-                    '::placeholder': {
+                    "::placeholder": {
                       fontWeight: 700,
-                      color: 'black'
-                    }
-                  }
-                    // "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
+                      color: "black",
+                    },
+                  },
+                  // "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
                 }}
                 length={6}
               />
             </Group>
 
-              <Button
-                className="w-full mb-6 "
-                styles={{
-                  root: {
-                    background:
-                      "linear-gradient(168.79deg,#E1261C 28.64%,#8A0B04 136.7%) !important",
-                    height: "50px",
-                    "&:hover": {
-                      background: "#6D0802 !important ",
-                    },
+            <Button
+              className="w-full mb-6 "
+              onClick={verifyCode}
+              styles={{
+                root: {
+                  background:
+                    "linear-gradient(168.79deg,#E1261C 28.64%,#8A0B04 136.7%) !important",
+                  height: "50px",
+                  "&:hover": {
+                    background: "#6D0802 !important ",
                   },
-                }}
-              >
-                Reset password
-              </Button>
+                },
+              }}
+            >
+              Reset password
+            </Button>
           </form>
 
           <div className="flex justify-end text-xs leading-4 mb-10">
             <span className=" text-dim-gray">Can’t find 6-digit pin? </span>
-            <Link href={'/authentication'}>
-            <span className=" text-engineering hover:text-blood-red">Resend Pin</span>
+            <Link href={"/authentication"}>
+              <span className=" text-engineering hover:text-blood-red">
+                Resend Pin
+              </span>
             </Link>
           </div>
 

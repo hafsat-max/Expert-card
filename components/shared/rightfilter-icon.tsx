@@ -18,7 +18,8 @@ export interface IStates {
 
 const RightFilterIcons = () => {
   const { selectedCard } = useContext(AuthContext) as ContextType;
-  const [opened, {open , close}] = useDisclosure(false)
+  const [opened, { open, close }] = useDisclosure(false);
+  console.log(selectedCard, "selected-kinni");
 
   // const editCard = async (url: string) => {
   //   try {
@@ -42,13 +43,18 @@ const RightFilterIcons = () => {
             alert("You cannot edit more than one card");
             return;
           }
-          open()
+          open();
           // editCard(selectedCard[0]);
         }}
       />
     ),
     ({ color }: Istyle) => <Download color={color} />,
-    ({ color }: Istyle) => <Delete color={color} />,
+    ({ color }: Istyle) => (
+      <Delete
+        selectedCard={selectedCard.length ? selectedCard[0] : 0}
+        color={color}
+      />
+    ),
   ];
 
   return (
@@ -70,4 +76,3 @@ const RightFilterIcons = () => {
 };
 
 export default RightFilterIcons;
-
