@@ -138,7 +138,7 @@ const LoginForm = () => {
         </div>
 
         <p className="mb-1 text-davy-grey text-xs">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href={"/signup"}>
             <span className="underline cursor  text-engineering hover:text-blood-red">
               Sign up

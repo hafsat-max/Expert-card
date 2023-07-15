@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const withAuth = (WrappedComponent) => {
-  const Wrapper = (props) => {
+const withAuth = (WrappedComponent:any) => {
+  const Wrapper = (props:any) => {
     const [userObject, setUserObject] = useState({});
 
     const router = useRouter(); // Perform authentication or authorization check
@@ -10,7 +10,7 @@ const withAuth = (WrappedComponent) => {
     const isAuthenticated = true;
 
     useEffect(() => {
-      setUserObject(JSON.parse(localStorage.getItem("my-user")));
+      setUserObject(JSON.parse(localStorage.getItem("my-user")as string));
     }, []);
 
     useEffect(() => {

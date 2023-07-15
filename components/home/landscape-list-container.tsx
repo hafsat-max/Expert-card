@@ -18,11 +18,12 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
           rowGap: "30px",
         }}
       >
-        {landscapes?.map((item) => {
+        {landscapes?.map((item, idx) => {
           // landscape card type 1
           if (item.card_type === "Landscape1") {
             return (
               <section
+              key={idx}
               onClick={() => {
                 if (selectedCard.includes(item?.id)) {
                   const filtered = selectedCard.filter(
@@ -100,6 +101,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
             // landscape 2 card type
             return (
               <section
+              key={idx}
                 onClick={() => {
                   if (selectedCard.includes(item?.id)) {
                     const filtered = selectedCard.filter(

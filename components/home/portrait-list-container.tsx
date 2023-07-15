@@ -36,11 +36,12 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
           rowGap: "30px",
         }}
       >
-        {portraits?.map((item) => {
+        {portraits?.map((item,idx) => {
           if (item.card_type === "Portrait1") {
             return (
               // portrait card type1
               <section className="flex flex-col justify-center items-center gap-1"
+              key={idx}
               onClick={() => {
                 if (selectedCard.includes(item?.id)) {
                   const filtered = selectedCard.filter(
@@ -101,6 +102,7 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
           } else {
             return (
               <section className="flex flex-col justify-center items-center gap-1"
+              key={idx}
               onClick={() => {
                 if (selectedCard.includes(item?.id)) {
                   const filtered = selectedCard.filter(

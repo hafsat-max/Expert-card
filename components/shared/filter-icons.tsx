@@ -21,6 +21,7 @@ const FilterIcons = ({selected, setSelected}:IStates) => {
       {list.map((Item, index) => (
 
           <Item
+          key={index}
             color={selected === index ? "#C81107" : "#9FA19C"}
             onClick={() => setSelected(index)}
           />

@@ -109,7 +109,7 @@ const OrganizationInfo = ({
           editId
             ? setPrefillData({
                 ...prefillData,
-                company_address: e.target.value,
+                company_address: value,
               })
             : handleCurrentFormData({
                 ...currentFormData,
