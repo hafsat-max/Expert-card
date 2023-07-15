@@ -29,7 +29,6 @@
     "iconsax-react": "^0.0.8",
     "jwt-decode": "^3.1.2",
     "next": "13.4.8",
-    "pietile-carousel": "^3.2.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
