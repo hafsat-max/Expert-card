@@ -4,8 +4,11 @@ import Image from "next/image";
 import emptywallet from '../../public/home/empty-wallet.png'
 import Link from 'next/link';
 import { Button } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { CreateCard } from '../modals/create-card';
 
-const NoCards = () => {
+const NoCards = ({fetchData}:any) => {
+  const [opened, { open, close }] = useDisclosure(false);
   return (
     <div className='flex flex-col gap-4 justify-center items-center'>
         <Image src={emptywallet} alt='wallet' width={212} height={300}/>
@@ -34,6 +37,9 @@ const NoCards = () => {
         New Card
       </Button>
         </Link>
+
+        <CreateCard fetchData={fetchData} opened={opened}  close={close}/>
+
 
         
     </div>

@@ -12,6 +12,7 @@ function Logout({ opened, close }: IModalProps) {
     <>
       <Modal
         opened={opened}
+        centered
         onClose={close}
         withCloseButton={false}
         className=" flex flex-col justify-center items-center gap-2"

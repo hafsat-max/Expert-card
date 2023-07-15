@@ -7,23 +7,28 @@ import ViewCard from "@/components/shared/view-card";
 import FilterNav from "@/components/shared/filter-nav";
 import FilterIcons from "@/components/shared/filter-icons";
 import FilterInput from "@/components/shared/filter-input";
-import { Edit2, LogoutCurve } from "iconsax-react";
-import Disable from "@/components/icons/disable";
-import NoCards from "@/components/home/no-cards";
-import { TableData } from "@/components/create-card/table";
 import axios from "axios";
 import CardListContainer from "@/components/home/card-list-container";
 import Landscape from "@/components/icons/landscape";
 import LandscapeListContainer from "@/components/home/landscape-list-container";
 import PortraitListContainer from "@/components/home/portrait-list-container";
 import RightFilterIcons from "@/components/shared/rightfilter-icon";
+import { table } from "console";
 
 const Homepage = () => {
   const [xperts, setXperts] = useState([]);
   const [portraits, setPortraits] = useState([]);
   const [landscapes, setLandscapes] = useState([]);
   const [selected, setSelected] = useState(0);
-  const [icons, setIcons]=useState(0)
+  const [icons, setIcons] = useState(0);
+  const [filter, setFilter] = useState("");
+  const [error, setError] = useState("");
+  const [query, setQuery] = useState({
+    landscapeQuery: "",
+    portraitQuery: "",
+    tableQuery: "",
+  });
+  console.log(query);
 
   // Getting the data of users in a table from the endpoint
   const fetchData = () => {
@@ -56,7 +61,6 @@ const Homepage = () => {
     })
       .then(function ({ data }) {
         setPortraits(data.results);
-        console.log(data.results.profile_picture);
       })
       .catch(function (error) {});
   };
@@ -86,6 +90,41 @@ const Homepage = () => {
   }, []);
   //End of  Landscape cards Endpoint fetching
 
+  // filter for specific cards
+  const handleFilter = () => {
+    const token = JSON.parse(localStorage.getItem("my-user") as string);
+    console.log(query.tableQuery, "queries");
+    let apiString = "";
+    if (selected === 0) {
+      console.log(query.tableQuery, 'table')
+      apiString =query.tableQuery?`https://web-production-9c5b.up.railway.app/api/card/expert_cards/?search=${query.tableQuery}`: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/"
+    } else if (selected === 1) {
+      apiString = `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?card_type=landscape&search=${query.landscapeQuery}`;
+    } else {
+      apiString = `https://web-production-9c5b.up.railway.app/api/card/expert_cards/?portrait&search=${query.portraitQuery}`;
+    }
+
+    axios({
+      url: apiString,
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+      },
+    })
+      .then(function ({ data }) {
+        selected === 0
+          ? setXperts(data.results)
+          : selected === 1
+          ? setLandscapes(data.results)
+          : setPortraits(data.results);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // https://web-production-9c5b.up.railway.app/api/card/expert_cards/
+  
+
   return (
     <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen">
       <header className="bg-white">
@@ -103,9 +142,16 @@ const Homepage = () => {
         {/* filter nav */}
         <FilterNav>
           <FilterIcons selected={selected} setSelected={setSelected} />
-          <FilterInput />
+          <FilterInput
+            filter={filter}
+            setFilter={setFilter}
+            selected={selected}
+            handleFilter={handleFilter}
+            query={query}
+            setQuery={setQuery}
+          />
 
-          <RightFilterIcons  selected={icons} setSelected={setIcons}/>
+          <RightFilterIcons />
         </FilterNav>
 
         {/* cards display section */}
@@ -124,22 +170,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-
-// <div className="flex items-center gap-3">
-// <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-//   <Edit2 size="20" color="#C9C8C6" className="font-bold" />
-// </div>
-
-// <div className=" flex justify-center items-center rounded-full   border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-//   <LogoutCurve
-//     size="22"
-//     color="#C9C8C6"
-//     className=" rotate-[-90deg]"
-//   />
-// </div>
-
-// <div className=" flex justify-center items-center rounded-full border-2 border-[#F2F2F2] w-[40px] h-[40px]">
-//   <Disable />
-// </div>
-// </div>

@@ -41,6 +41,7 @@ const AuthenticationForm = () => {
           >
             <Group position="center">
               <PinInput
+              type="number"
               placeholder='0'
                 styles={{
                   input:{
@@ -52,14 +53,12 @@ const AuthenticationForm = () => {
                   }
                     // "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
                 }}
-                type="number"
                 length={6}
               />
             </Group>
 
-            <Link href={"/reset-password"} className="mb-[clamp(40px, 5vw, 70px)]">
               <Button
-                className="w-full mb-6"
+                className="w-full mb-6 "
                 styles={{
                   root: {
                     background:
@@ -73,13 +72,12 @@ const AuthenticationForm = () => {
               >
                 Reset password
               </Button>
-            </Link>
           </form>
 
           <div className="flex justify-end text-xs leading-4 mb-10">
             <span className=" text-dim-gray">Can’t find 6-digit pin? </span>
             <Link href={'/authentication'}>
-            <span className=" text-engineering">Resend Pin</span>
+            <span className=" text-engineering hover:text-blood-red">Resend Pin</span>
             </Link>
           </div>
 

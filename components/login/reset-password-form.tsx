@@ -97,7 +97,7 @@ const ResetPasswordForm = () => {
 
         <Link href={'/login'} className="flex justify-center items-center gap-[13.6px]">
             <Image src={'/shared/arrow-left.svg'} width={6.4} height={12.79} alt="arrow left"/>
-            <Paragraph text="Back to Sign In" style="text-davy-grey"/>
+            <Paragraph text="Back to Sign In" style="text-davy-grey hover:text-engineering"/>
           </Link>
       </form>
     </section>

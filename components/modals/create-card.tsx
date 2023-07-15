@@ -1,13 +1,13 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Button, Group, Modal, Stepper } from "@mantine/core";
+import axios from "axios";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useDisclosure } from "@mantine/hooks";
 
 import PersonalInfo, { InnerPersonal } from "./personal-info";
 import OrganizationInfo from "./organization-info";
-// import CardStyle from "./card-style";
 import { CardSuccess } from "./card-success";
-import { useDisclosure } from "@mantine/hooks";
-import { toast } from "react-toastify";
-import axios from "axios";
 import CardStyle from "./card-style";
 
 export interface IModalProps {
@@ -15,9 +15,10 @@ export interface IModalProps {
   close: () => void;
   closeSecondModal?: () => void;
   fetchData?: () => void;
+  editId?: number;
 }
 
-export function CreateCard({ opened, fetchData, close }: IModalProps) {
+export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [successOpened, { open: opensuccess, close: closesuccess }] =
@@ -30,7 +31,6 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
     last_name: "",
     phone_number: "",
     middle_name: "",
-    // work_phone: "",
     email: "",
     company_address: "",
     role: "",
@@ -54,6 +54,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
     if (active == 0) {
       // do validation for first input which is totalFormData
       if (!totalFormData.first_name || !totalFormData.last_name) {
+        toast.error('Fill out all required details.')
         allowValidate = false;
       } else {
         allowValidate = true;
@@ -68,7 +69,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
       ) {
         console.log("first");
         allowValidate = false;
-        toast("fill out all details");
+        toast.error('Fill out all required details.')
       } else {
         allowValidate = true;
       }
@@ -76,6 +77,46 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
 
     return allowValidate;
   };
+
+  //Fetch user details and populate input
+  const getUserDetails = async (id: number) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("my-user") as string);
+      const response = await axios({
+        url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${id}/`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+        },
+      });
+      const {first_name, last_name, phone_number, middle_name, email, company_address, role, tribe, card_type, profile_picture} = response.data;
+      setTotalFormData({
+        first_name, last_name, phone_number, middle_name, email, company_address, role, tribe, card_type, profile_picture
+      })
+      toast.success('Card created sucessfully')
+      setTotalFormData({
+        profile_picture: null,
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        middle_name: "",
+        email: "",
+        company_address: "",
+        role: "",
+        tribe: "",
+        card_type: "",
+      })
+    } catch (error) {
+      console.log(error)
+      toast.error(error?.response?.data.message)
+
+    }     
+  };
+
+  useEffect(() => {
+    if (editId)
+    getUserDetails(editId);
+  }, [editId]);
 
   const sendDetails = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
@@ -97,7 +138,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
       })
       .catch(function (error) {
         toast.error(error.response.data?.message);
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -227,7 +268,7 @@ export function CreateCard({ opened, fetchData, close }: IModalProps) {
               },
             }}
           >
-            {active === 2 ? "Create" : "Next"}
+            {active === 2 ? (editId?'Save' : "Create") : "Next"}
           </Button>
         </Group>
       </Modal>

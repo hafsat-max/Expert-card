@@ -1,38 +1,31 @@
-// import { useRouter } from "next/router";
-// import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-// export const isAuthenticated = async (): Promise<boolean> => {
-//     try {
-//       const response = await fetch("/api/auth/check");
-//       const data = await response.json();
-  
-//       if (response.ok) {
-//         return data.isAuthenticated;
-//       }
-//     } catch (error) {
-//       console.error("Error checking authentication status:", error);
-//     }
-  
-//     return false;
-//   };
-  
+const withAuth = (WrappedComponent) => {
+  const Wrapper = (props) => {
+    const [userObject, setUserObject] = useState(null);
+    // const [isLoading, setIsLoading] = useState(true);
 
-// const ProtectedRoute = <P extends object>(
-//   WrappedComponent: React.ComponentType<P>
-// ) => {
-//   const Wrapper: React.FC<P> =(props) => {
-//     const router = useRouter();
+    const router = useRouter();
 
-//     useEffect(() => {
-//       if (!isAuthenticated()) {
-//         router.push("/signin");
-//       }
-//     }, []);
+    useEffect(() => {
+      const checkAuth = () => {
+        const user = JSON.parse(localStorage.getItem("my-user"));
+        if (!user) {
+          router.push("/signin"); // Redirect to login page if not authenticated
+        } else {
+        }
+        setUserObject(user);
+      };
 
-//     return  isAuthenticated() ? <WrappedComponent {...props} /> : null;
-//   };
-// a
-//   return Wrapper;
-// };
+      checkAuth();
+    }, [router]);
 
-// export default ProtectedRoute;
+    // Render the wrapped component if authenticated
+    return userObject ? <WrappedComponent {...props} /> : null;
+  };
+
+  return Wrapper;
+};
+
+export default withAuth;

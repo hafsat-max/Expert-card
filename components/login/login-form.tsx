@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { Button, PasswordInput } from "@mantine/core";
 import Link from "next/link";
@@ -8,8 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { isNotEmpty, useForm } from "@mantine/form";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext, ContextType } from "@/pages/_app";
-import { data } from "../create-card/data";
 
 interface UserProps {
   email: string;
@@ -57,10 +55,6 @@ const LoginForm = () => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    Login(userDetails);
-  };
 
   return (
     <section

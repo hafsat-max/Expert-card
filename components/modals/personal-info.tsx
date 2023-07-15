@@ -194,23 +194,6 @@ const PersonalInfo = ({
         }}
       />
 
-      {/* <TextInput
-        value={currentFormData.middle_name}
-        onChange={(e) => {
-          handleCurrentFormData({
-            ...currentFormData,
-            middle_name: e.target.value,
-          });
-        }}
-        placeholder="Enter first name"
-        label="First Name"
-        classNames={{
-          root: "flex flex-col gap-5 mt-10",
-          input:
-            "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
-          label: "text-davy-grey text-sm leading-4",
-        }}
-      /> */}
     </div>
   );
 };

@@ -1,44 +1,47 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import { MantineProvider } from '@mantine/core';
-import { Dispatch, SetStateAction, useState, createContext, useEffect } from 'react';;
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { MantineProvider } from "@mantine/core";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  createContext,
+  useEffect,
+} from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-
-export interface UserDetails  {
+export interface UserDetails {
   profile_picture: string;
   first_name: string;
 }
 
-export type ContextType = {user: UserDetails | null; setUser: Dispatch<SetStateAction<UserDetails | null>>;}
+export type ContextType = {
+  user: UserDetails | null;
+  setUser: Dispatch<SetStateAction<UserDetails | null>>;
+  selectedCard: number[];
+  setSelectedCard: Dispatch<SetStateAction<number[]>>;
+};
 
 export const AuthContext = createContext<ContextType | null>(null);
 
-
-
 export default function App({ Component, pageProps }: AppProps) {
-
-
-
-
-  
-
-
   const [user, setUser] = useState<UserDetails | null>(null);
-  
+  const [selectedCard, setSelectedCard] = useState<number[]>([])
+
   let storeData = {
     user,
-    setUser
+    setUser,
+    selectedCard,
+    setSelectedCard
   };
 
-
-
-  return(
+  return (
     <AuthContext.Provider value={storeData}>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Component {...pageProps} />
-    </MantineProvider>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <ToastContainer/> 
+        <Component {...pageProps} />
+      </MantineProvider>
     </AuthContext.Provider>
-      
-  )
+  );
 }

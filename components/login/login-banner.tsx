@@ -7,7 +7,7 @@ import banner from "@/public/login/banner.png";
 const LoginBanner = () => {
   return (
     <section
-      className={clsx("flex flex-col flex-1 ", "gap-16 justify-center")}
+      className={clsx("flex flex-col flex-1 ", "gap-16 justify-center", 'max-[832px]:hidden')}
     >
       <Image src={banner} alt="banner" width={300} height={300}  className="self-center"/>
       <h3

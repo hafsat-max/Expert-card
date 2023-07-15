@@ -3,9 +3,23 @@ import { Modal, Button, Group } from "@mantine/core";
 import Image from "next/image";
 
 import { IModalProps } from "./create-card";
+import axios from "axios";
 
 
 const handleDelete=()=>{
+  const token = JSON.parse(localStorage.getItem("my-user") as string);
+  axios ({
+    url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/{expert_id}/`,
+    headers: {
+      Authorization: `Bearer ${token.token}`,
+      
+    },
+
+  })
+    .then(function ({ data }) {
+      
+    })
+    .catch(function (error) {});
 
 } 
 
@@ -15,6 +29,7 @@ function DeleteCard({ opened, close }: IModalProps) {
     <>
       <Modal
         opened={opened}
+        centered
         onClose={close}
         withCloseButton={false}
         className=" flex flex-col justify-center items-center gap-2"
@@ -42,14 +57,15 @@ function DeleteCard({ opened, close }: IModalProps) {
             <Button
               onClick={close}
               type="submit"
-              className="mb-6 self-center px-10"
+              className="mb-6 self-center px-10 rounded-lg text-[#54565B]"
               styles={{
                 root: {
                   background:
-                    "linear-gradient(168.79deg,#E1261C 28.64%,#8A0B04 136.7%) !important",
+                    "white",
+                    border:'1px solid #8B908B',
                   height: "50px",
                   "&:hover": {
-                    background: "#6D0802 !important",
+                    background: 'white'
                   },
                 },
               }}

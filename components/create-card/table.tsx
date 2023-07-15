@@ -7,7 +7,7 @@ export interface IXperts {
   address: string;
   city: string;
   country: string;
-  created_date: Date;
+  created_date: string;
   card_type: string;
   email: string;
   first_name: string;
@@ -21,6 +21,7 @@ export interface IXperts {
   role: string;
   tribe: string;
   is_active: boolean;
+  id: number
 }
 
 
@@ -32,7 +33,6 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
       <th>Email Address</th>
       <th>Designation</th>
       <th>Status</th>
-
     </tr>
   );
 
@@ -41,7 +41,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
 
       <td className="flex justify-center ">
           <img
-            src={item.profile_picture}
+            src={item.card_type === 'portraita1' ? '/create-card/portraita1.png'  : item.card_type ==='portraita2'? '/create-card/portraita2.png': item.card_type === 'landscapa1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
             width={24}
             height={14.24}
             alt="cards"

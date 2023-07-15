@@ -108,7 +108,7 @@ const SignupForm = () => {
           styles={{
             input: {
               ":focus": {
-                border: "1px solid #C81107",
+                border: "1px solid #9FA19C!important",
               },
             },
           }}
@@ -129,7 +129,7 @@ const SignupForm = () => {
           styles={{
             input: {
               ":focus": {
-                border: "1px solid #C81107",
+                border: "1px solid #9FA19C !important",
               },
             },
           }}
@@ -150,7 +150,7 @@ const SignupForm = () => {
           styles={{
             input: {
               ":focus": {
-                border: "1px solid #C81107",
+                border: "1px solid #9FA19C !important",
               },
             },
           }}
@@ -169,10 +169,13 @@ const SignupForm = () => {
           }}
           styles={{
             input: {
-              ":focus": {
-                border: "1px solid #C81107",
+              ":focusB": {
+                border: "1px solid #9FA19C !important",
               },
             },
+            innerInput:{
+              marginTop: '10px'
+            }
           }}
         />
 
@@ -190,9 +193,13 @@ const SignupForm = () => {
           styles={{
             input: {
               ":focus": {
-                border: "1px solid #C81107",
+                border: "1px solid #9FA19C !important",
               },
             },
+            innerInput:{
+              marginTop: '10px'
+            },
+            
           }}
         />
 

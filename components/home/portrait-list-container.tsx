@@ -1,9 +1,10 @@
-import React from "react";
-import { IXperts } from "../create-card/table";
+import React, {useContext } from "react";
+import { AuthContext, ContextType } from "@/pages/_app";
 import NoCards from "./no-cards";
+import clsx from "clsx";
 
 interface IGetData {
-  retrieve_update_delete_url: string;
+  id: number;
   full_name: string;
   first_name: string;
   middle_name: string;
@@ -18,9 +19,13 @@ interface IGetData {
   phone_number: string;
   created_date: string;
   is_active: boolean;
+
 }
 
 const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
+  const { setSelectedCard, selectedCard } = useContext(
+    AuthContext
+  ) as ContextType;
   return portraits.length ? (
     <section className="bg-white max-w-[1440px] flex-1 w-full">
       <div
@@ -35,15 +40,42 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
           if (item.card_type === "Portrait1") {
             return (
               // portrait card type1
-              <section className="flex flex-col justify-center items-center gap-1">
-                <div className="  w-[176px] h-[310px] flex flex-col gap-3 items-center  border border-solid rounded-lg bg-blood-red relative">
-                  <img
-                    src="/afex-logo.svg"
-                    alt=""
-                    className="w-[50px] h-[50px]"
-                  />
+              <section className="flex flex-col justify-center items-center gap-1"
+              onClick={() => {
+                if (selectedCard.includes(item?.id)) {
+                  const filtered = selectedCard.filter(
+                    (el) => el !== item?.id
+                  );
+                  setSelectedCard(filtered);
+                }
+                else
+                setSelectedCard([
+                  ...selectedCard,
+                  item?.id,
+                ]);
+              }}                
+              >
+                <div
+                  className={clsx(
+                    selectedCard.includes(item?.id)
+                      ? "border-[2px] border-[red]"
+                      : "border-[2px] border-[#F5F6F7]",
+                    "p-[5px] hover:opacity-90 rounded-xl"
+                  )}
+                >
+                <div className="  w-[176px] h-[310px] flex flex-col gap-3 items-center bg-cover bg-center  justify-center border border-solid rounded-lg relative"
+                style={{
+                  backgroundImage: "url(/create-card/portrait-bg.png)"
+                }}
+                >
+      
 
-                  <div className=" w-[100px] h-[100px] rounded-full bg-cover bg-no-repeat bg-red-950"></div>
+                  <div className=" w-[100px] h-[100px] rounded-full bg-cover bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${item.profile_picture})`
+                    }}
+
+                  ></div>
                   <div>
                     <h2 className=" font-medium text-20 text-center text-white ">
                       {item.first_name}
@@ -57,6 +89,7 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
                     www.afexnigeria.com
                   </p>
                 </div>
+                </div>
                 <p className="font-bold text-[#7C827D] text-base pt-2">
                   {item.full_name}
                 </p>
@@ -67,9 +100,36 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
             );
           } else {
             return (
-              <section className="flex flex-col justify-center items-center gap-1">
-                <div className="  w-[176px] h-[310px] flex flex-col justify-center gap-3 items-center  border border-solid rounded-lg bg-blood-red relative">
-                  <div className="p-2    ">
+              <section className="flex flex-col justify-center items-center gap-1"
+              onClick={() => {
+                if (selectedCard.includes(item?.id)) {
+                  const filtered = selectedCard.filter(
+                    (el) => el !== item?.id
+                  );
+                  setSelectedCard(filtered);
+                }
+                else
+                setSelectedCard([
+                  ...selectedCard,
+                  item?.id,
+                ]);
+              }}
+              >
+                <div
+                className={clsx(
+                  selectedCard.includes(item?.id)
+                    ? "border-[2px] border-[red]"
+                    : "border-[2px] border-[#F5F6F7]",
+                  "p-[5px] hover:opacity-90 rounded-xl"
+                )}
+                >
+                <div className="  w-[176px] h-[310px] flex flex-col justify-center gap-3 items-center bg-cover bg-center  border border-solid rounded-lg relative"
+                style={{
+                  backgroundImage: "url(/create-card/portrait-bg.png)"
+                }}
+               
+                >
+                  <div className="p-2 ">
                   <img src={item.qr_code} alt="" width={90} height={90} />
                   </div>
                   <div>
@@ -81,6 +141,7 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
                       {item.last_name}
                     </h3>
                   </div>
+                </div>
                 </div>
                 <p className="font-bold text-[#7C827D] text-base pt-2">
                   {item.full_name}
