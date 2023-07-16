@@ -27,7 +27,7 @@ export interface IXperts {
 
 export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
-    <tr>
+    <tr className=" pt-8 pb-4">
       <th className="flex justify-items-start">Card</th>
       <th>Xpert Name</th>
       <th>Email Address</th>

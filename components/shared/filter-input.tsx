@@ -29,7 +29,7 @@ const FilterInput = ({
 }: IFilterState) => {
   const [queryV, setQueryV] = useState("");
   return (
-    <div className="flex w-[clamp(400px,37%,px)] h-[60px] border border-[#EBEBEB] rounded-xl ">
+    <div className="flex w-[clamp(400px,37%,543px)] h-[60px] border border-[#EBEBEB] rounded-xl ">
       <TextInput
         className="flex-1 self-center"
         value={

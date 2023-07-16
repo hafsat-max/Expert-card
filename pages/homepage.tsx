@@ -160,7 +160,7 @@ const Homepage = () => {
         </FilterNav>
 
         {/* cards display section */}
-        <section className=" flex flex-1 mx-auto w-full max-w-[1440px]">
+        <section className=" flex flex-1 mx-auto w-full max-w-[1440px] scroll">
           {selected === 0 ? (
             <CardListContainer xperts={xperts} />
           ) : selected === 1 ? (

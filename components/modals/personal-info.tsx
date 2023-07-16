@@ -61,11 +61,8 @@ const PersonalInfo = ({
                 profile_picture: files[0],
               });
           setFileName(files[0].name);
-          setImgSize(files[0].size);
-          const data = files[0].size;
-          console.log(data / 1024);
+        setImgSize((Number(files[0].size) / 1024 / 1024).toFixed(2) as unknown as number);
           reader.readAsDataURL(files[0]);
-
           reader.onload = () => {
             setImgPreview(reader.result as string);
           };
@@ -96,8 +93,8 @@ const PersonalInfo = ({
           </Dropzone.Reject>
           {imgPreview ? (
             <div className=" flex flex-col gap-2 justify-center items-center">
-              <div className="rounded-[11px] p-[1px] border border-[#7C827D]">
-                <Image src={imgPreview} alt="" width={150} height={150} />
+              <div className="rounded-[11px]  border border-[#7C827D] overflow-hidden">
+                <Image src={imgPreview} alt="" width={150} height={150}  />
               </div>
               <div className="flex justify-between items-center gap-4">
                 <span className=" text-davy-grey text-14 ">{fileName}</span>

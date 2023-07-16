@@ -52,7 +52,7 @@ const CardStyle = ({currentFormData, handleCurrentFormData}: PersonalInfoProp) =
             flippedCard === item.id ? "flipped" : ""
           }`}
           onMouseEnter={() => handleCardFlip(item.id)}
-          onMouseLeave={() => handleCardFlip(item.id)}
+          // onMouseLeave={() => handleCardFlip(item.id)}
           style={{ width: "200px",  }}
         >
           {/* Front side of the card */}
