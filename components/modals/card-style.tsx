@@ -42,7 +42,6 @@ const CardStyle = ({currentFormData, handleCurrentFormData}: PersonalInfoProp) =
         return <div
           key={item.id}
           onClick={(e)=>{
-            console.log(item.id)
             handleCurrentFormData({
               ...currentFormData,
               card_type: item.id

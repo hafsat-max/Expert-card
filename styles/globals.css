@@ -112,9 +112,12 @@ body::-webkit-scrollbar {
 }
 
 /* Optional: Add custom styles for scrollbar */
-body,.scroll {
+body {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+}
+.scroll::-webkit-scrollbar {
+  display: none;
 }
 
 * {

@@ -32,11 +32,9 @@ const ResetPasswordForm = () => {
       )
       .then(function ({ data }) {
         toast.success(data?.message);
-        console.log(data);
         Router.push("/login");
       })
       .catch(function (error) {
-        console.log(error);
         // toast.error(error?.response.data.message);
       });
   };

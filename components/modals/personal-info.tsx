@@ -44,6 +44,13 @@ const PersonalInfo = ({
 
   return (
     <div>
+      <div
+        className="bg-[#F3F3F3] mb-[19px]"
+        style={{
+          height: "1px",
+          overflow: 'auto'
+        }}
+      ></div>
       <h3 className="text-14 font-medium text-davy-grey pb-2">
         Upload Picture
       </h3>
@@ -61,7 +68,11 @@ const PersonalInfo = ({
                 profile_picture: files[0],
               });
           setFileName(files[0].name);
-        setImgSize((Number(files[0].size) / 1024 / 1024).toFixed(2) as unknown as number);
+          setImgSize(
+            (Number(files[0].size) / 1024 / 1024).toFixed(
+              2
+            ) as unknown as number
+          );
           reader.readAsDataURL(files[0]);
           reader.onload = () => {
             setImgPreview(reader.result as string);
@@ -94,7 +105,7 @@ const PersonalInfo = ({
           {imgPreview ? (
             <div className=" flex flex-col gap-2 justify-center items-center">
               <div className="rounded-[11px]  border border-[#7C827D] overflow-hidden">
-                <Image src={imgPreview} alt="" width={150} height={150}  />
+                <Image src={imgPreview} alt="" width={150} height={150} />
               </div>
               <div className="flex justify-between items-center gap-4">
                 <span className=" text-davy-grey text-14 ">{fileName}</span>

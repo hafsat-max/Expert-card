@@ -28,11 +28,13 @@ const LoginForm = () => {
       .then(function (response) {
         setLoader(false)
         const token = JSON.parse(localStorage.getItem("my-user") as string);
-        console.log(response.data.profile_picture)
 
         if (response.data?.token) {
           localStorage.setItem("my-user", JSON.stringify(response.data));
-          toast.success("You have successfully logged in",);
+          toast.success("You have successfully logged in",{
+            autoClose: 2000,
+
+          });
           router.push("/homepage");
           
           setUserDetails({ email: "",
@@ -40,9 +42,10 @@ const LoginForm = () => {
         }
       })
       .catch(function (error) {
-        console.log(error);
-        toast.error("Invalid login credentials or not a verified user");
-        setLoader(true)
+        toast.error("Invalid login credentials or not a verified user",{
+          autoClose: 2000,
+
+        });
       });
       
   };

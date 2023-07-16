@@ -19,20 +19,6 @@ export interface IStates {
 const RightFilterIcons = () => {
   const { selectedCard } = useContext(AuthContext) as ContextType;
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(selectedCard, "selected-kinni");
-
-  // const editCard = async (url: string) => {
-  //   try {
-  //     const { data } = await axios({
-  //       method: "PUT",
-  //       url,
-  //       data:
-  //     });
-
-  //   } catch (error) {
-
-  //   }
-  // };
 
   const list = [
     ({ color }: Istyle) => (
@@ -40,7 +26,7 @@ const RightFilterIcons = () => {
         color={color}
         onClick={() => {
           if (selectedCard.length > 1) {
-            alert("You cannot edit more than one card");
+            toast.error("You cannot edit more than one card", {autoClose: 2000});
             return;
           }
           open();

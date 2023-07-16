@@ -23,7 +23,6 @@ const AuthenticationForm = () => {
         }
       )
       .then(function ({ data }) {
-        console.log(data)
         router.push("/reset-password");
       })
       .catch(function (error) {

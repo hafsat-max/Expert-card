@@ -15,7 +15,7 @@ const login = () => {
     </Nav>
 
     <div className='w-[90vw] mx-auto flex-1 flex items-center max-w-[1440px]'>
-    <section className={clsx('flex ', 'gap-[clamp(2rem,5vw,4.625rem)] w-full max-w-[1440px]')}>
+    <section className={clsx('flex', 'gap-[clamp(2rem,5vw,4.625rem)] w-full max-w-[1440px]')}>
         <LoginBanner />
         <LoginForm />
     </section>

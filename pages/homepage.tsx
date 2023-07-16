@@ -27,7 +27,6 @@ const Homepage = () => {
     portraitQuery: "",
     tableQuery: "",
   });
-  console.log(query);
 
   // Getting the data of users in a table from the endpoint
   const fetchData = () => {
@@ -131,14 +130,14 @@ const Homepage = () => {
   // https://web-production-9c5b.up.railway.app/api/card/expert_cards/
 
   return (
-    <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen">
+    <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen overflow-auto">
       <header className="bg-white">
         <Nav style="!pt-0 h-[63px]  my-auto flex justify-between items-center  w-[94vw] mx-auto max-w-[1440px]">
           <UserDisplay />
         </Nav>
       </header>
 
-      <main className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full gap-1 ">
+      <main className="flex-1 flex flex-col max-w-[1440px] mx-auto w-full gap-1 overflow-auto ">
         {/* card listing */}
         <CardListing>
           <ViewCard fetchData={fetchData} />
@@ -160,7 +159,7 @@ const Homepage = () => {
         </FilterNav>
 
         {/* cards display section */}
-        <section className=" flex flex-1 mx-auto w-full max-w-[1440px] scroll">
+        <section className=" flex flex-1 mx-auto w-full max-w-[1440px] scroll overflow-auto bg-white">
           {selected === 0 ? (
             <CardListContainer xperts={xperts} />
           ) : selected === 1 ? (

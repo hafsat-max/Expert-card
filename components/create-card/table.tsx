@@ -27,19 +27,19 @@ export interface IXperts {
 
 export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
-    <tr className=" pt-8 pb-4">
-      <th className="flex justify-items-start">Card</th>
-      <th>Xpert Name</th>
-      <th>Email Address</th>
-      <th>Designation</th>
-      <th>Status</th>
+    <tr className=" overflow-auto">
+      <th className=" items-center !pt-8 !py-4">Card</th>
+      <th className=" !pb-5 items-center  !pt-8 !py-4">Xpert Name</th>
+      <th className=" !pb-5 items-center  !pt-8 !py-4">Email Address</th>
+      <th className=" !pb-5 items-center  !pt-8 !py-4">Designation</th>
+      <th className=" !pb-5 items-center  !pt-8 !py-4">Status</th>
     </tr>
   );
 
   const rows = xperts?.map((item, index) => (
-    <tr key={index}>
+    <tr key={index} >
 
-      <td className="flex justify-items-start">
+      <td className="flex justify-start items-center">
           <img
             src={item.card_type === 'Portrait1' ? '/create-card/portraita1.png'  : item.card_type ==='Portrait2'? '/create-card/portraita2.png': item.card_type === 'Landscape1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
             width={24}
@@ -71,9 +71,9 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
   ));
 
   return (
-    <div className=" bg-white w-full max-w-[1440px] flex-1 ">
-      <Table className=" w-[90%] mx-auto">
-        <thead>{tableHead}</thead>
+    <div className=" bg-white w-full max-w-[1440px] flex-1 relative ">
+      <Table className=" w-[90%] mx-auto absolute top-0 right-0 left-0">
+        <thead className=" overflow-auto">{tableHead}</thead>
         <tbody>{rows}</tbody>
       </Table>
     </div>
