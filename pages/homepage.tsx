@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import Nav from "@/components/shared/nav";
 import UserDisplay from "@/components/shared/user-display";
@@ -7,13 +8,10 @@ import ViewCard from "@/components/shared/view-card";
 import FilterNav from "@/components/shared/filter-nav";
 import FilterIcons from "@/components/shared/filter-icons";
 import FilterInput from "@/components/shared/filter-input";
-import axios from "axios";
 import CardListContainer from "@/components/home/card-list-container";
-import Landscape from "@/components/icons/landscape";
 import LandscapeListContainer from "@/components/home/landscape-list-container";
 import PortraitListContainer from "@/components/home/portrait-list-container";
 import RightFilterIcons from "@/components/shared/rightfilter-icon";
-import { table } from "console";
 import withAuth from "@/components/protected-route";
 
 const Homepage = () => {
@@ -162,7 +160,7 @@ const Homepage = () => {
         </FilterNav>
 
         {/* cards display section */}
-        <section className=" flex flex-1 w-full max-w-[1440px]">
+        <section className=" flex flex-1 mx-auto w-full max-w-[1440px]">
           {selected === 0 ? (
             <CardListContainer xperts={xperts} />
           ) : selected === 1 ? (

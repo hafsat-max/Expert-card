@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Nav from '@/components/shared/nav'
 import LoginBanner from '@/components/login/login-banner';
 import ResetPasswordForm from '@/components/login/reset-password-form';
+import withAuth from '@/components/protected-route';
 
 const ResetPassword = () => {
   return (
@@ -28,4 +29,4 @@ const ResetPassword = () => {
   )
 }
 
-export default ResetPassword
+export default withAuth(ResetPassword)

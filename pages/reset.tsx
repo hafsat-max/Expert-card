@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import Nav from '@/components/shared/nav'
 import LoginBanner from '@/components/login/login-banner';
 import ResetForm from '@/components/login/reset-form';
+import withAuth from '@/components/protected-route';
 
 const Reset = () => {
   return (
@@ -27,4 +28,4 @@ const Reset = () => {
   )
 }
 
-export default Reset
+export default withAuth(Reset)

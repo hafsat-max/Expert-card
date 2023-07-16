@@ -28,7 +28,7 @@ export interface IXperts {
 export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
     <tr>
-      <th className="flex justify-center">Card</th>
+      <th className="flex justify-items-start">Card</th>
       <th>Xpert Name</th>
       <th>Email Address</th>
       <th>Designation</th>
@@ -39,7 +39,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
   const rows = xperts?.map((item, index) => (
     <tr key={index}>
 
-      <td className="flex justify-center ">
+      <td className="flex justify-items-start">
           <img
             src={item.card_type === 'Portrait1' ? '/create-card/portraita1.png'  : item.card_type ==='Portrait2'? '/create-card/portraita2.png': item.card_type === 'Landscape1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
             width={24}
@@ -71,7 +71,7 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
   ));
 
   return (
-    <div className=" bg-white max-w-[1440px] flex-1 ">
+    <div className=" bg-white w-full max-w-[1440px] flex-1 ">
       <Table className=" w-[90%] mx-auto">
         <thead>{tableHead}</thead>
         <tbody>{rows}</tbody>
