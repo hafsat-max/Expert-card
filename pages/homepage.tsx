@@ -90,9 +90,7 @@ const Homepage = () => {
 
   // filter for specific cards
   const handleFilter = (val_: string) => {
-    console.log(val_);
     const token = JSON.parse(localStorage.getItem("my-user") as string);
-    console.log(query.tableQuery, "queries");
     let apiString = "";
     if (selected === 0) {
       apiString = val_

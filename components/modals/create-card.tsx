@@ -216,7 +216,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             fontWeight: 500,
           },
           close:{
-            background: '#B0B7C3',
+            color: '',
             width: '10px',
             height: '10px'
           }

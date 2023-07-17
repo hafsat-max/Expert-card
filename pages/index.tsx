@@ -36,7 +36,7 @@ const index = () => {
           </div>
         </section>
 
-        <img src="home/big-circle.svg" className="absolute left-[504px] bottom-[283px]"/>
+        <img src="home/big-circle.svg" className="absolute left-[500px] bottom-[283px]"/>
         <img src="home/big-icon.svg" className="absolute right-[555px] bottom-[104px]" />
         <img src="home/small-circle.svg" className="absolute right-[505px] top-[240px]"/>
         <img src="home/grey-icon.svg" className="absolute right-[426px] top-[102px]"/>

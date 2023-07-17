@@ -104,7 +104,7 @@ const PersonalInfo = ({
           </Dropzone.Reject>
           {imgPreview ? (
             <div className=" flex flex-col gap-2 justify-center items-center">
-              <div className="rounded-[11px]  border border-[#7C827D] overflow-hidden">
+              <div className="rounded-[11px]  border border-[#EFF0F6] overflow-hidden">
                 <Image src={imgPreview} alt="" width={150} height={150} />
               </div>
               <div className="flex justify-between items-center gap-4">

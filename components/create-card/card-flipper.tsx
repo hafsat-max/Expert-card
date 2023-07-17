@@ -5,17 +5,17 @@ const FlippingCard = () => {
 
   const images = [
     {
-      id: 'landscape1',
+      id: "landscape1",
       src1: "/create-card/landscapea1.png",
       src2: "/create-card/landscapea2.png",
     },
     {
-      id: 'landscape2',
+      id: "landscape2",
       src1: "/create-card/landscapeb1.png",
       src2: "/create-card/landscapeb2.png",
     },
     {
-      id: 'portrait1',
+      id: "portrait1",
       src1: "/create-card/portraita1.png",
       src2: "/create-card/portraita2.png",
     },
@@ -26,7 +26,7 @@ const FlippingCard = () => {
     },
   ];
 
-  const handleCardFlip = (cardId:any) => {
+  const handleCardFlip = (cardId: any) => {
     if (flippedCard === cardId) {
       setFlippedCard(null);
     } else {
@@ -44,7 +44,7 @@ const FlippingCard = () => {
           }`}
           onMouseEnter={() => handleCardFlip(item.id)}
           onMouseLeave={() => handleCardFlip(item.id)}
-          style={{ width: "200px",  }}
+          style={{ width: "200px" }}
         >
           {/* Front side of the card */}
           <div className="card-front">
