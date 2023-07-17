@@ -37,7 +37,7 @@ const ResetForm = () => {
         router.push("/authentication");
       })
       .catch(function (error) {
-        toast.error(error);
+        toast.error(error?.message);
       });
   };
 

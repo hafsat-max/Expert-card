@@ -26,7 +26,6 @@ const signUp = (value: UserProps) => {
       }
     )
     .then(function (response) {
-      console.log(response);
       if (response.data?.token) {
         router.push("/login");
       }

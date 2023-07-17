@@ -6,9 +6,12 @@ import DeleteCard from "../modals/delete-card";
 
 interface DeleteProps extends Istyle {
   selectedCard?: number;
+  fetchData : ()=> void;
+  fetchPortrait: ()=> void;
+  fetchLandscape: ()=>void
 }
 
-const Delete = ({ color, onClick, className, selectedCard }: DeleteProps) => {
+const Delete = ({ color, onClick, className, selectedCard, fetchData, fetchLandscape, fetchPortrait }: DeleteProps) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -48,6 +51,9 @@ const Delete = ({ color, onClick, className, selectedCard }: DeleteProps) => {
         opened={opened}
         expert_id={selectedCard as number}
         close={close}
+        fetchData={fetchData}
+        fetchLandscape={fetchLandscape}
+        fetchPortrait={fetchPortrait}
       />
     </>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Istyle } from "./task";
 
-const Edit = ({ color, onClick, className }: Istyle) => {
+const Edit = ({ color, onClick, className}: Istyle) => {
   return (
     <svg
       onClick={onClick}

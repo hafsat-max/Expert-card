@@ -3,19 +3,24 @@ import { useDisclosure } from "@mantine/hooks";
 import { toast } from "react-toastify";
 import clsx from "clsx";
 
-import { Edit } from "iconsax-react";
 import Download from "../icons/download";
 import Delete from "../icons/delete";
 import { AuthContext, ContextType } from "@/pages/_app";
 import Task, { Istyle } from "../icons/task";
 import { CreateCard } from "../modals/create-card";
+import Edit from "../icons/edit";
 
 export interface IStates {
   selected: number;
   setSelected: React.Dispatch<React.SetStateAction<number>>;
 }
+export interface IFunctions {
+  fetchData: ()=> void;
+  fetchPortrait: ()=>void;
+  fetchLandscape: ()=> void;
+}
 
-const RightFilterIcons = () => {
+const RightFilterIcons = ({fetchData, fetchLandscape, fetchPortrait}: IFunctions) => {
   const { selectedCard } = useContext(AuthContext) as ContextType;
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -23,6 +28,9 @@ const RightFilterIcons = () => {
     ({ color }: Istyle) => (
       <Edit
         color={color}
+        fetchData={fetchData}
+        fetchPortrait={fetchPortrait}
+        fetchLandscape={fetchLandscape}
         onClick={() => {
           if (selectedCard.length > 1) {
             toast.error("You cannot edit more than one card", {
@@ -40,6 +48,9 @@ const RightFilterIcons = () => {
       <Delete
         selectedCard={selectedCard.length ? selectedCard[0] : 0}
         color={color}
+        fetchData={fetchData}
+        fetchPortrait={fetchPortrait}
+        fetchLandscape={fetchLandscape}
       />
     ),
   ];

@@ -4,6 +4,9 @@ export interface Istyle {
   color: string;
   onClick?: () => void;
   className?: string;
+  fetchData?: () => void;
+  fetchPortrait?: () => void;
+  fetchLandscape?: () => void;
 }
 
 const Task = ({ color, onClick, className }: Istyle) => {

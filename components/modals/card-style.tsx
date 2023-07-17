@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { PersonalInfoProp } from "./personal-info";
 
 const CardStyle = ({
@@ -38,6 +37,8 @@ const CardStyle = ({
       setFlippedCard(cardId);
     }
   };
+
+  console.log(currentFormData);
 
   return (
     <div className="mt-3 w-[80%] mx-auto flex flex-col  gap-[33px]">

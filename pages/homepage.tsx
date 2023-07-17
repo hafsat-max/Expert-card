@@ -113,16 +113,13 @@ const Homepage = () => {
       },
     })
       .then(function ({ data }) {
-        console.log(data, "data value");
         selected === 0
           ? setXperts(data.results)
           : selected === 1
           ? setLandscapes(data.results)
           : setPortraits(data.results);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   };
 
   return (
@@ -151,7 +148,7 @@ const Homepage = () => {
             setQuery={setQuery}
           />
 
-          <RightFilterIcons />
+          <RightFilterIcons  fetchData={fetchData} fetchPortrait= {fetchPortrait} fetchLandscape={fetchLandscape}/>
         </FilterNav>
 
         {/* cards display section */}

@@ -7,9 +7,19 @@ import axios from "axios";
 
 interface DeleteCardsProps extends IModalProps {
   expert_id: number;
+  fetchData?: () => void;
+  fetchPortrait?: () => void;
+  fetchLandscape?: () => void;
 }
 
-function DeleteCard({ opened, close, expert_id }: DeleteCardsProps) {
+function DeleteCard({
+  opened,
+  close,
+  expert_id,
+  fetchData,
+  fetchPortrait,
+  fetchLandscape,
+}: DeleteCardsProps) {
   const handleDelete = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     // axios.delete()
@@ -26,8 +36,12 @@ function DeleteCard({ opened, close, expert_id }: DeleteCardsProps) {
         const data = response.data;
       })
       .catch(function (error) {
-        console.log(error);
         close();
+      })
+      .finally(() => {
+        fetchData();
+        fetchPortrait();
+        fetchLandscape();
       });
   };
 

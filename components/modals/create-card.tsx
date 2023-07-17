@@ -156,7 +156,6 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
       })
       .catch(function (error) {
         toast.error(error.response.data?.message);
-        console.log(error);
       });
   };
 
@@ -181,7 +180,6 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
       })
       .catch(function (error) {
         toast.error(error.response.data?.message);
-        console.log(error);
       });
   };
 
@@ -313,11 +311,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
 
           <Button
             onClick={() => {
-              active == 2
-                ? editId
-                  ? updatDetails(editId)
-                  : sendDetails
-                : nextStep();
+              active == 2 ? sendDetails() : nextStep();
             }}
             styles={{
               root: {
