@@ -1,10 +1,9 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import LandingCarousel from "@/components/home/carousel";
 
 import Nav from "@/components/shared/nav";
+import LandingCarousel from "@/components/home/carousel";
 import TextSection from "@/components/home/text-section";
-// import grey from '@/components/home/grey-icon.svg';
 
 const index = () => {
   return (
@@ -36,14 +35,27 @@ const index = () => {
           </div>
         </section>
 
-        <img src="home/big-circle.svg" className="absolute left-[500px] bottom-[283px]"/>
-        <img src="home/big-icon.svg" className="absolute right-[555px] bottom-[104px]" />
-        <img src="home/small-circle.svg" className="absolute right-[505px] top-[240px]"/>
-        <img src="home/grey-icon.svg" className="absolute right-[426px] top-[102px]"/>
-        <img src="home/orange-circle.svg" className="absolute top-[46px] right-[83px]"/>
-        
+        <img
+          src="home/big-circle.svg"
+          className="absolute left-[500px] bottom-[283px]"
+        />
+        <img
+          src="home/big-icon.svg"
+          className="absolute right-[555px] bottom-[104px]"
+        />
+        <img
+          src="home/small-circle.svg"
+          className="absolute right-[505px] top-[240px]"
+        />
+        <img
+          src="home/grey-icon.svg"
+          className="absolute right-[426px] top-[102px]"
+        />
+        <img
+          src="home/orange-circle.svg"
+          className="absolute top-[46px] right-[83px]"
+        />
       </section>
-
     </main>
   );
 };

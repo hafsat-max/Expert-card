@@ -128,7 +128,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
         profile_picture,
       });
     } catch (error) {
-      toast.error(error?.response.message)
+      toast.error(error?.response.message);
     }
   };
 
@@ -163,7 +163,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
   const updatDetails = (id: number) => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
     const formData = new FormData();
-  
+
     Object.entries(totalFormData).forEach(([key, value]) => {
       formData.append(key, value);
     });
@@ -215,11 +215,11 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             color: "#54565B",
             fontWeight: 500,
           },
-          close:{
-            color: '',
-            width: '10px',
-            height: '10px'
-          }
+          close: {
+            color: "",
+            width: "10px",
+            height: "10px",
+          },
         }}
       >
         {/* Modal content */}
@@ -260,7 +260,6 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
             },
           }}
         >
-
           <Stepper.Step completedIcon={<span>1</span>}>
             <PersonalInfo
               currentFormData={totalFormData}

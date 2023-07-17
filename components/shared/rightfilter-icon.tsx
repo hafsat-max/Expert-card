@@ -1,15 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, {useContext } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import { toast } from "react-toastify";
+import clsx from "clsx";
 
-import Task, { Istyle } from "../icons/task";
 import { Edit } from "iconsax-react";
 import Download from "../icons/download";
 import Delete from "../icons/delete";
-import clsx from "clsx";
 import { AuthContext, ContextType } from "@/pages/_app";
-import { toast } from "react-toastify";
-import axios from "axios";
+import Task, { Istyle } from "../icons/task";
 import { CreateCard } from "../modals/create-card";
-import { useDisclosure } from "@mantine/hooks";
 
 export interface IStates {
   selected: number;
@@ -26,7 +25,9 @@ const RightFilterIcons = () => {
         color={color}
         onClick={() => {
           if (selectedCard.length > 1) {
-            toast.error("You cannot edit more than one card", {autoClose: 2000});
+            toast.error("You cannot edit more than one card", {
+              autoClose: 2000,
+            });
             return;
           }
           open();

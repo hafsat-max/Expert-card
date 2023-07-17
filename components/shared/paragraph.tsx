@@ -1,14 +1,12 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
 interface HeadingProps {
-    text: ReactNode;
-    style?: string;
-  }
-
-const Paragraph = ({ text, style }: HeadingProps) => {
-  return (
-    <p className={`text-center text-16   ${style}`}>{text}</p>
-  )
+  text: ReactNode;
+  style?: string;
 }
 
-export default Paragraph
+const Paragraph = ({ text, style }: HeadingProps) => {
+  return <p className={`text-center text-16   ${style}`}>{text}</p>;
+};
+
+export default Paragraph;

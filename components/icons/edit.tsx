@@ -2,11 +2,11 @@ import React from "react";
 
 import { Istyle } from "./task";
 
-const Edit = ({color, onClick, className}:Istyle) => {
+const Edit = ({ color, onClick, className }: Istyle) => {
   return (
     <svg
-    onClick={onClick}
-    className={className}
+      onClick={onClick}
+      className={className}
       width="20"
       height="20"
       viewBox="0 0 21 21"

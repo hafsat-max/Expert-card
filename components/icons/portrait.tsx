@@ -1,10 +1,11 @@
 import React from "react";
+
 import { Istyle } from "./task";
 
-const Portrait = ({color, onClick} : Istyle) => {
+const Portrait = ({ color, onClick }: Istyle) => {
   return (
     <svg
-    onClick={onClick}
+      onClick={onClick}
       width="15"
       height="18"
       viewBox="0 0 15 18"

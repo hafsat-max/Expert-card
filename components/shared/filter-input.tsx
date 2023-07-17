@@ -1,8 +1,6 @@
 import { TextInput } from "@mantine/core";
 import React, { useState } from "react";
 import Image from "next/image";
-import { IStates } from "./filter-icons";
-import axios from "axios";
 
 interface IQuery {
   tableQuery: string;

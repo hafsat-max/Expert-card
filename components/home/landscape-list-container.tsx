@@ -23,20 +23,15 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
           if (item.card_type === "Landscape1") {
             return (
               <section
-              key={idx}
-              onClick={() => {
-                if (selectedCard.includes(item?.id)) {
-                  const filtered = selectedCard.filter(
-                    (el) => el !== item?.id
-                  );
-                  setSelectedCard(filtered);
-                }
-                else
-                setSelectedCard([
-                  ...selectedCard,
-                  item?.id,
-                ]);
-              }}
+                key={idx}
+                onClick={() => {
+                  if (selectedCard.includes(item?.id)) {
+                    const filtered = selectedCard.filter(
+                      (el) => el !== item?.id
+                    );
+                    setSelectedCard(filtered);
+                  } else setSelectedCard([...selectedCard, item?.id]);
+                }}
                 className="flex cursor-pointer flex-col justify-center items-center gap-1"
               >
                 <div
@@ -101,21 +96,16 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
             // landscape 2 card type
             return (
               <section
-              key={idx}
+                key={idx}
                 onClick={() => {
                   if (selectedCard.includes(item?.id)) {
                     const filtered = selectedCard.filter(
                       (el) => el !== item?.id
                     );
                     setSelectedCard(filtered);
-                  }
-                  else
-                  setSelectedCard([
-                    ...selectedCard,
-                    item?.id,
-                  ]);
+                  } else setSelectedCard([...selectedCard, item?.id]);
                 }}
-                 className=" cursor-pointer flex flex-col justify-center items-center gap-1"
+                className=" cursor-pointer flex flex-col justify-center items-center gap-1"
               >
                 <div
                   className={clsx(

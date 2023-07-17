@@ -1,8 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import { useEffect, useState } from "react";
 import { PietileCarousel } from "pietile-carousel";
 
 import x from "@/public/home/swipe1.svg";

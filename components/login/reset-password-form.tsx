@@ -34,9 +34,7 @@ const ResetPasswordForm = () => {
         toast.success(data?.message);
         Router.push("/login");
       })
-      .catch(function (error) {
-        // toast.error(error?.response.data.message);
-      });
+      .catch(function (error) {});
   };
 
   return (

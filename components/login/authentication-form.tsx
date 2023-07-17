@@ -4,29 +4,29 @@ import { Button, Group, PinInput } from "@mantine/core";
 import Link from "next/link";
 import Image from "next/image";
 
-import Heading from "../shared/heading";
-import Paragraph from "../shared/paragraph";
 import router from "next/router";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+import Paragraph from "../shared/paragraph";
+import Heading from "../shared/heading";
 
 const AuthenticationForm = () => {
-  const [verification_code, setPin] = useState('');
+  const [verification_code, setPin] = useState("");
 
   const verifyCode = () => {
     axios
       .post(
         "https://web-production-9c5b.up.railway.app/api/account/verify_verification_code/",
         {
-          verification_code
+          verification_code,
         }
       )
       .then(function ({ data }) {
         router.push("/reset-password");
       })
       .catch(function (error) {
-        toast.error(error?.response.data.message)
+        toast.error(error?.response.data.message);
       });
   };
 
@@ -75,7 +75,6 @@ const AuthenticationForm = () => {
                       color: "black",
                     },
                   },
-                  // "placeholder:!text-black placeholder:!0 placeholder:!font-medium placeholder:!text-[2 rem]",
                 }}
                 length={6}
               />

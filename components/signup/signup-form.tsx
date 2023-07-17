@@ -15,30 +15,31 @@ interface UserProps {
   last_name: string;
   password: string;
   confirm_password: string;
-  // profilePicture: null;
 }
 
 const signUp = (value: UserProps) => {
   axios
-    .post("https://web-production-5804.up.railway.app/api/account/create_account/", {
-      ...value
-    })
+    .post(
+      "https://web-production-5804.up.railway.app/api/account/create_account/",
+      {
+        ...value,
+      }
+    )
     .then(function (response) {
-      console.log(response)
+      console.log(response);
       if (response.data?.token) {
         router.push("/login");
       }
       toast.success(response.data.message.toString());
     })
     .catch(function (error) {
-      if(error.response.data?.password){
+      if (error.response.data?.password) {
         toast.error(error.response.data?.password[0]);
       }
-      if(error.response.data?.email){
+      if (error.response.data?.email) {
         toast.error(error.response.data?.email.toString());
       }
     });
-   
 };
 
 const SignupForm = () => {
@@ -70,7 +71,6 @@ const SignupForm = () => {
         "flex-1 self-start max-w-[466px]",
         "shadow-shadow  rounded-lg bg-white",
         "p-10 py-6 h-[600px] overflow-y-scroll"
-      
       )}
     >
       <ToastContainer toastClassName="customToast" />
@@ -86,12 +86,10 @@ const SignupForm = () => {
       {/* form */}
       <form
         className={clsx("pt-12")}
-        onSubmit={form.onSubmit((value) =>{
-          signUp(value)
+        onSubmit={form.onSubmit((value) => {
+          signUp(value);
           form.reset();
-        }
-          )}
-        
+        })}
       >
         {/*first name  */}
         <TextInput
@@ -156,7 +154,6 @@ const SignupForm = () => {
           }}
         />
 
-
         <PasswordInput
           label="Password"
           placeholder="Password"
@@ -173,9 +170,9 @@ const SignupForm = () => {
                 border: "1px solid #9FA19C !important",
               },
             },
-            innerInput:{
-              marginTop: '10px'
-            }
+            innerInput: {
+              marginTop: "10px",
+            },
           }}
         />
 
@@ -196,10 +193,9 @@ const SignupForm = () => {
                 border: "1px solid #9FA19C !important",
               },
             },
-            innerInput:{
-              marginTop: '10px'
+            innerInput: {
+              marginTop: "10px",
             },
-            
           }}
         />
 
@@ -216,7 +212,9 @@ const SignupForm = () => {
         <p className="mb-1 text-davy-grey text-xs">
           Already have an account?{" "}
           <Link href={"/login"}>
-            <span className="underline cursor-pointer text-engineering hover:text-blood-red">Sign in</span>
+            <span className="underline cursor-pointer text-engineering hover:text-blood-red">
+              Sign in
+            </span>
           </Link>
         </p>
         {/* submit */}

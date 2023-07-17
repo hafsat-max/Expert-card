@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { Button, TextInput } from "@mantine/core";
 import { Group, Text, rem } from "@mantine/core";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
@@ -48,7 +48,7 @@ const PersonalInfo = ({
         className="bg-[#F3F3F3] mb-[19px]"
         style={{
           height: "1px",
-          overflow: 'auto'
+          overflow: "auto",
         }}
       ></div>
       <h3 className="text-14 font-medium text-davy-grey pb-2">

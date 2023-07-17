@@ -1,6 +1,4 @@
 import { Checkbox, Table } from "@mantine/core";
-import Image from "next/image";
-import { data } from "./data";
 import clsx from "clsx";
 
 export interface IXperts {
@@ -21,9 +19,8 @@ export interface IXperts {
   role: string;
   tribe: string;
   is_active: boolean;
-  id: number
+  id: number;
 }
-
 
 export function TableData({ xperts }: { xperts: IXperts[] }) {
   const tableHead = (
@@ -37,20 +34,27 @@ export function TableData({ xperts }: { xperts: IXperts[] }) {
   );
 
   const rows = xperts?.map((item, index) => (
-    <tr key={index} >
-
+    <tr key={index}>
       <td className="flex justify-start items-center">
-          <img
-            src={item.card_type === 'Portrait1' ? '/create-card/portraita1.png'  : item.card_type ==='Portrait2'? '/create-card/portraita2.png': item.card_type === 'Landscape1' ?'/create-card/landscapea1.png': '/create-card/landscapea2.png' }
-            width={24}
-            height={14.24}
-            alt="cards"
-            style={{
-              width: "13.71px",
-              height: "24px",
-            }}
-          />
-        </td>
+        <img
+          src={
+            item.card_type === "Portrait1"
+              ? "/create-card/portraita1.png"
+              : item.card_type === "Portrait2"
+              ? "/create-card/portraita2.png"
+              : item.card_type === "Landscape1"
+              ? "/create-card/landscapea1.png"
+              : "/create-card/landscapea2.png"
+          }
+          width={24}
+          height={14.24}
+          alt="cards"
+          style={{
+            width: "13.71px",
+            height: "24px",
+          }}
+        />
+      </td>
       <td>{item.full_name}</td>
       <td>{item.email}</td>
       <td>{item.role.toLowerCase()}</td>

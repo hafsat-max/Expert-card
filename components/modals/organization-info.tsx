@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Select, TextInput } from "@mantine/core";
-import { InnerPersonal, PersonalInfoProp } from "./personal-info";
 import Link from "next/link";
 import axios from "axios";
 
-// interface PersonalInfoProp {
-//   currentFormData: InnerPersonal;
-//   handleCurrentFormData: (val: InnerPersonal) => void;
-
-// }
+import { PersonalInfoProp } from "./personal-info";
 
 const OrganizationInfo = ({
   currentFormData,

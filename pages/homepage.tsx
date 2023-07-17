@@ -125,8 +125,6 @@ const Homepage = () => {
       });
   };
 
-  // https://web-production-9c5b.up.railway.app/api/card/expert_cards/
-
   return (
     <section className=" bg-[#F5F5F6] flex flex-col gap-4 h-screen overflow-auto">
       <header className="bg-white">

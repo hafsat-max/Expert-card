@@ -15,17 +15,13 @@ interface UserProps {
 }
 
 const LoginForm = () => {
-  const [loader, setLoader] = useState(false);
-
   const Login = (value: UserProps) => {
-    setLoader(true);
     axios
       .post("https://web-production-9c5b.up.railway.app/api/account/login/", {
         email: value.email,
         password: value.password,
       })
       .then(function (response) {
-        setLoader(false);
         const token = JSON.parse(localStorage.getItem("my-user") as string);
 
         if (response.data?.token) {
@@ -110,9 +106,6 @@ const LoginForm = () => {
           label="Password"
           required
           {...form.getInputProps("password")}
-          // onChange={(e) =>
-          //   setUserDetails({ ...userDetails, password: e.target.value })
-          // }
           classNames={{
             root: "flex flex-col gap-5 mt-10",
             innerInput: clsx(
@@ -136,7 +129,7 @@ const LoginForm = () => {
 
         <p className="mb-1 text-davy-grey text-xs">
           Don&apos;t have an account?{" "}
-          <Link href={"/signup"}>
+          <Link href="/signup">
             <span className="underline cursor  text-engineering hover:text-blood-red">
               Sign up
             </span>

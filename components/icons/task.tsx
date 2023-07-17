@@ -2,18 +2,15 @@ import React from "react";
 
 export interface Istyle {
   color: string;
-  onClick?: ()=>void
-  className? : string
- 
+  onClick?: () => void;
+  className?: string;
 }
-
-
 
 const Task = ({ color, onClick, className }: Istyle) => {
   return (
     <svg
-    onClick={onClick}
-    className={className}
+      onClick={onClick}
+      className={className}
       width="28"
       height="28"
       viewBox="0 0 28 28"

@@ -24,14 +24,10 @@ function DeleteCard({ opened, close, expert_id }: DeleteCardsProps) {
       )
       .then(function (response) {
         const data = response.data;
-        // fetchPortrait()
-       
-        // Do something with the data
       })
       .catch(function (error) {
-        // Handle the error
-        console.log(error)
-        close()
+        console.log(error);
+        close();
       });
   };
 

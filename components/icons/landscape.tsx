@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Istyle } from "./task";
 
-const Landscape = ({color, onClick}:Istyle ) => {
-
+const Landscape = ({ color, onClick }: Istyle) => {
   return (
     <svg
-    onClick={onClick}
+      onClick={onClick}
       width="24"
       height="18"
       viewBox="0 0 24 18"
