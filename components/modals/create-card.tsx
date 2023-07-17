@@ -21,7 +21,7 @@ export interface IModalProps {
 
 export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const [successOpened, { open: opensuccess, close: closesuccess }] =
     useDisclosure(false);
@@ -143,7 +143,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
     Object.entries(totalFormData).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    setLoader(true)
+    setLoader(true);
     axios({
       url: "https://web-production-9c5b.up.railway.app/api/card/expert_cards/create/",
       data: formData,
@@ -155,13 +155,13 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
       .then(function () {
         close();
         setShowSuccessModal(true);
-        toast.success('Card successfully created')
-        setLoader(false)
+        toast.success("Card successfully created");
+        setLoader(false);
       })
       .catch(function (error) {
         toast.error(error.response.data?.message);
-        setLoader(false)
-      })
+        setLoader(false);
+      });
   };
 
   const updatDetails = (id: number) => {
@@ -341,8 +341,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
         close={closesuccess}
         handleClose={setShowSuccessModal}
       />
-        <LoadingOverlay visible={loader}  />
-
+      <LoadingOverlay visible={loader} />
     </>
   );
 }

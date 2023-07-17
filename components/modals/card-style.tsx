@@ -15,7 +15,7 @@ const CardStyle = ({
       id: "Landscape1",
       src1: "/create-card/landscapea1.png",
       src2: "/create-card/landscapea2.png",
-      height: 166
+      height: 166,
     },
     {
       id: "Landscape2",

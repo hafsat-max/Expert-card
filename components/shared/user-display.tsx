@@ -1,12 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { AuthContext, ContextType, UserDetails } from "@/pages/_app";
-import Logout from "../modals/logout";
 import { useDisclosure } from "@mantine/hooks";
+
+import Logout from "../modals/logout";
+import { UserDetails } from "@/pages/_app";
+import ActivityLog from "../modals/activity-log";
 
 const UserDisplay = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const [log, setLog] = useState(false);
 
   const [payload, setPayload] = useState<UserDetails>({
     profile_picture: "",
@@ -21,12 +24,7 @@ const UserDisplay = () => {
 
   return (
     <section className="flex justify-between items-center gap-8  border-l-2 border-[#E8ECEF] pl-7 py-[15px]">
-      <Image
-        src={"/shared/notification.svg"}
-        alt="notification"
-        width={30}
-        height={30}
-      />
+      <ActivityLog log={log} setLog={setLog} />
 
       <div className={clsx("flex gap-2 items-center ")}>
         <img
