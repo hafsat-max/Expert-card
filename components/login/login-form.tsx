@@ -15,39 +15,34 @@ interface UserProps {
 }
 
 const LoginForm = () => {
+  const [loader, setLoader] = useState(false);
 
-  const [loader, setLoader] = useState(false)
-  
   const Login = (value: UserProps) => {
-    setLoader(true)
+    setLoader(true);
     axios
       .post("https://web-production-9c5b.up.railway.app/api/account/login/", {
         email: value.email,
         password: value.password,
       })
       .then(function (response) {
-        setLoader(false)
+        setLoader(false);
         const token = JSON.parse(localStorage.getItem("my-user") as string);
 
         if (response.data?.token) {
           localStorage.setItem("my-user", JSON.stringify(response.data));
-          toast.success("You have successfully logged in",{
+          toast.success("You have successfully logged in", {
             autoClose: 2000,
-
           });
           router.push("/homepage");
-          
-          setUserDetails({ email: "",
-          password: "",})
+
+          setUserDetails({ email: "", password: "" });
         }
       })
       .catch(function (error) {
-        toast.error("Invalid login credentials or not a verified user",{
+        toast.error("Invalid login credentials or not a verified user", {
           autoClose: 2000,
-
         });
       });
-      
   };
 
   const [userDetails, setUserDetails] = useState<UserProps>({
@@ -64,7 +59,6 @@ const LoginForm = () => {
       password: isNotEmpty(),
     },
   });
-
 
   return (
     <section
@@ -133,7 +127,7 @@ const LoginForm = () => {
         {/* forgot password */}
         <div className="flex justify-end mt-5 mb-[2rem]">
           <Link
-            href={"/reset"}
+            href="/reset"
             className="text-engineering text-xs font-semibold hover:text-blood-red"
           >
             Forgot Password?
@@ -165,9 +159,7 @@ const LoginForm = () => {
         >
           Sign in
         </Button>
-
       </form>
-
     </section>
   );
 };

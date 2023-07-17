@@ -6,7 +6,7 @@ import LoginBanner from '@/components/login/login-banner';
 import LoginForm from '@/components/login/login-form';
 import SignupForm from '@/components/signup/signup-form';
 
-const login = () => {
+const SignUp = () => {
   return (
     <section
     className={clsx('bg-cover bg-no-repeat bg-top-center flex flex-col h-screen')}
@@ -28,4 +28,4 @@ const login = () => {
   )
 }
 
-export default login
+export default SignUp

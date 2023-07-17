@@ -28,4 +28,4 @@ const Reset = () => {
   )
 }
 
-export default withAuth(Reset)
+export default Reset

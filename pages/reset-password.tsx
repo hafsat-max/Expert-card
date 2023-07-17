@@ -29,4 +29,4 @@ const ResetPassword = () => {
   )
 }
 
-export default withAuth(ResetPassword)
+export default ResetPassword
