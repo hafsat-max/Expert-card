@@ -11,11 +11,11 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
   return landscapes.length ? (
     <div className="bg-white max-w-[1440px] w-full flex-1">
       <div
-        className=" grid w-[90%] mx-auto mt-10 justify-center items-center "
+        className=" grid w-[90%] mx-auto mt-10 justify-center items-center gap-[15px] "
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(270px, 1fr))",
-          gap: "10px",
-          rowGap: "30px",
+          // gap: "10px",
+          // rowGap: "30px",
         }}
       >
         {landscapes?.map((item, idx) => {
@@ -42,7 +42,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
                     "p-[5px] hover:opacity-90 rounded-xl"
                   )}
                 >
-                  <div className=" bg-white w-[272px] flex flex-col h-[169.72px] border rounded-lg overflow-hidden">
+                  <div className=" bg-white min-w-[272px] flex flex-col h-[169.72px] border rounded-lg overflow-hidden">
                     {/* top image */}
                     <div
                       style={{
@@ -79,7 +79,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
                       <img
                         src={item.qr_code}
                         alt=""
-                        className=" w-[70px] h-[70px] mt-[-40px] border-[20  px] border-[#54585B]"
+                        className=" w-[70px] h-[70px] mt-[-40px] border-[20px] border-[#54585B]"
                       />
                     </div>
                   </div>
@@ -117,7 +117,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
                 >
                   <div
                     className={
-                      " bg-white w-[272px] flex gap-10 justify-center p-3 items-center  h-[169.72px] border rounded-lg overflow-hidden bg-cover"
+                      " bg-white min-w-[272px] flex gap-10 justify-center p-3 items-center  h-[169.72px] border rounded-lg overflow-hidden bg-cover"
                     }
                     style={{
                       backgroundImage: "url('/grey-gradient.png')",

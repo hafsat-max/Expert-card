@@ -122,9 +122,8 @@ body {
 
 * {
   font-family: "Switzer";
-
 }
-*:focus{
+*:focus {
   border-color: none !important;
 }
 
@@ -144,24 +143,23 @@ td {
   font-size: clamp(14px, 1vw, 16px) !important;
 }
 
-.mantine-1q18irc::-webkit-scrollbar, .mantine-1qusw1r::-webkit-scrollbar{
+.mantine-1q18irc::-webkit-scrollbar,
+.mantine-1qusw1r::-webkit-scrollbar {
   display: none;
-
 }
-td{
+td {
   border-color: white !important;
 }
 .Toastify__toast-container {
-  border-color: #C81107 !important;
+  border-color: #c81107 !important;
 }
 
 .customToast {
-  border-color: #C81107;
+  border-color: #c81107;
 }
-.outline-none:focus{
-  border-color: none ;
+.outline-none:focus {
+  border-color: none;
 }
-
 
 .flip-card {
   perspective: 1000px;
@@ -189,4 +187,16 @@ td{
 
 .flipped .flip-card-inner {
   transform: rotateY(180deg);
+}
+.mantine-Input-wrapper {
+  border: 0.0625rem solid #ced4da;
+  border-radius: 6px !important;
+}
+
+.mantine-PasswordInput-input {
+  border: none !important;
+}
+
+.formInput .mantine-Input-wrapper {
+  border: none !important;
 }

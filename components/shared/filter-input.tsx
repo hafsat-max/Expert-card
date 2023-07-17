@@ -27,7 +27,7 @@ const FilterInput = ({
 }: IFilterState) => {
   const [queryV, setQueryV] = useState("");
   return (
-    <div className="flex w-[clamp(400px,37%,543px)] h-[60px] border border-[#EBEBEB] rounded-xl ">
+    <div className="flex w-[clamp(400px,37%,543px)] h-[60px] border border-[#EBEBEB] rounded-xl formInput">
       <TextInput
         className="flex-1 self-center"
         value={
@@ -71,6 +71,9 @@ const FilterInput = ({
           />
         }
         styles={{
+          wrapper: {
+            border: "none !important",
+          },
           input: {
             outline: "none !important",
             border: "none !important",
@@ -82,10 +85,7 @@ const FilterInput = ({
         }}
       />
 
-      <div
-        className="flex justify-center items-center gap-3 bg-engineering hover:bg-blood-red text-white px-[26px] rounded-tr-xl rounded-br-xl cursor-pointer"
-        // onClick={() => handleFilter()}
-      >
+      <div className="flex justify-center items-center gap-3 bg-engineering hover:bg-blood-red text-white px-[26px] rounded-tr-xl rounded-br-xl cursor-pointer">
         <Image src={"/shared/filter.svg"} width={16} height={16} alt="filter" />
         <span>Filter</span>
       </div>

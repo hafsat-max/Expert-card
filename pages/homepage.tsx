@@ -19,9 +19,7 @@ const Homepage = () => {
   const [portraits, setPortraits] = useState([]);
   const [landscapes, setLandscapes] = useState([]);
   const [selected, setSelected] = useState(0);
-  const [icons, setIcons] = useState(0);
   const [filter, setFilter] = useState("");
-  const [error, setError] = useState("");
   const [query, setQuery] = useState({
     landscapeQuery: "",
     portraitQuery: "",
@@ -148,7 +146,11 @@ const Homepage = () => {
             setQuery={setQuery}
           />
 
-          <RightFilterIcons  fetchData={fetchData} fetchPortrait= {fetchPortrait} fetchLandscape={fetchLandscape}/>
+          <RightFilterIcons
+            fetchData={fetchData}
+            fetchPortrait={fetchPortrait}
+            fetchLandscape={fetchLandscape}
+          />
         </FilterNav>
 
         {/* cards display section */}

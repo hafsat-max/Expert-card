@@ -157,6 +157,11 @@ const PersonalInfo = ({
       </Dropzone>
 
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         value={editId ? prefillData?.first_name : currentFormData.first_name}
         onChange={(e) => {
           editId
@@ -182,6 +187,11 @@ const PersonalInfo = ({
       />
 
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         value={editId ? prefillData?.last_name : currentFormData.last_name}
         onChange={(e) => {
           editId
@@ -205,6 +215,11 @@ const PersonalInfo = ({
       />
 
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         value={editId ? prefillData?.middle_name : currentFormData.middle_name}
         onChange={(e) => {
           editId

@@ -39,6 +39,11 @@ const OrganizationInfo = ({
     <section>
       {/* Work Phone */}
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         type="textc"
         placeholder="Enter Work Phone"
         label="Work Phone"
@@ -62,14 +67,14 @@ const OrganizationInfo = ({
             "bg-input  h-[54px] outline-none pl-4 text-xs text-spanish-gray w-full rounded-lg",
           label: "text-davy-grey text-sm leading-4",
         }}
-        styles={{
-          icon: {
-            alignSelf: "flex-end",
-          },
-        }}
       />
 
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
@@ -95,6 +100,11 @@ const OrganizationInfo = ({
 
       {/* select address */}
       <Select
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         value={
           editId
             ? prefillData?.company_address
@@ -135,6 +145,11 @@ const OrganizationInfo = ({
 
       {/* Role designation */}
       <TextInput
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         type="text"
         value={editId ? prefillData?.role : currentFormData.role}
         onChange={(e) => {
@@ -160,6 +175,11 @@ const OrganizationInfo = ({
 
       {/* tribe/ department */}
       <Select
+        styles={{
+          input: {
+            border: "none",
+          },
+        }}
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
         value={editId ? prefillData?.tribe : currentFormData.tribe}
