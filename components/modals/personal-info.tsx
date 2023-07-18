@@ -58,15 +58,16 @@ const PersonalInfo = ({
       <Dropzone
         onDrop={(files) => {
           const reader = new FileReader();
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                profile_picture: files[0],
-              })
-            : handleCurrentFormData({
-                ...currentFormData,
-                profile_picture: files[0],
-              });
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       profile_picture: files[0],
+          //     })
+          //   :
+          handleCurrentFormData({
+            ...currentFormData,
+            profile_picture: files[0],
+          });
           setFileName(files[0].name);
           setImgSize(
             (Number(files[0].size) / 1024 / 1024).toFixed(
@@ -162,17 +163,22 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={editId ? prefillData?.first_name : currentFormData.first_name}
+        value={
+          // editId ?
+          // prefillData?.first_name :
+          currentFormData.first_name
+        }
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                first_name: e.target.value,
-              })
-            : handleCurrentFormData({
-                ...currentFormData,
-                first_name: e.target.value,
-              });
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       first_name: e.target.value,
+          //     })
+          //   :
+          handleCurrentFormData({
+            ...currentFormData,
+            first_name: e.target.value,
+          });
         }}
         disabled={false}
         readOnly={false}
@@ -192,17 +198,21 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={editId ? prefillData?.last_name : currentFormData.last_name}
+        value={
+          // editId ? prefillData?.last_name :
+          currentFormData.last_name
+        }
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                last_name: e.target.value,
-              })
-            : handleCurrentFormData({
-                ...currentFormData,
-                last_name: e.target.value,
-              });
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       last_name: e.target.value,
+          //     })
+          //   :
+          handleCurrentFormData({
+            ...currentFormData,
+            last_name: e.target.value,
+          });
         }}
         placeholder="Enter last name"
         label="Last Name"
@@ -220,17 +230,21 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={editId ? prefillData?.middle_name : currentFormData.middle_name}
+        value={
+          // editId ? prefillData?.middle_name :
+          currentFormData.middle_name
+        }
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                middle_name: e.target.value,
-              })
-            : handleCurrentFormData({
-                ...currentFormData,
-                middle_name: e.target.value,
-              });
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       middle_name: e.target.value,
+          //     })
+          //   :
+          handleCurrentFormData({
+            ...currentFormData,
+            middle_name: e.target.value,
+          });
         }}
         placeholder="Enter middle name"
         label="Middle Name"

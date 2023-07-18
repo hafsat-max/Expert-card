@@ -48,15 +48,17 @@ const OrganizationInfo = ({
         placeholder="Enter Work Phone"
         label="Work Phone"
         value={
-          editId ? prefillData?.phone_number : currentFormData.phone_number
+          // editId ? prefillData?.phone_number : 
+          currentFormData.phone_number
         }
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                phone_number: e.target.value,
-              })
-            : handleCurrentFormData({
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       phone_number: e.target.value,
+          //     })
+          //   : 
+            handleCurrentFormData({
                 ...currentFormData,
                 phone_number: e.target.value,
               });
@@ -78,14 +80,17 @@ const OrganizationInfo = ({
         type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
-        value={editId ? prefillData?.email : currentFormData.email}
+        value={
+          // editId ? prefillData?.email : 
+          currentFormData.email}
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                email: e.target.value,
-              })
-            : handleCurrentFormData({
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       email: e.target.value,
+          //     })
+          //   : 
+            handleCurrentFormData({
                 ...currentFormData,
                 email: e.target.value,
               });
@@ -106,17 +111,19 @@ const OrganizationInfo = ({
           },
         }}
         value={
-          editId
-            ? prefillData?.company_address
-            : currentFormData.company_address
+          // editId
+          //   ? prefillData?.company_address
+          //   : 
+            currentFormData.company_address
         }
         onChange={(value) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                company_address: value,
-              })
-            : handleCurrentFormData({
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       company_address: value,
+          //     })
+          //   : 
+            handleCurrentFormData({
                 ...currentFormData,
                 company_address: value as string,
               });
@@ -151,14 +158,17 @@ const OrganizationInfo = ({
           },
         }}
         type="text"
-        value={editId ? prefillData?.role : currentFormData.role}
+        value={
+          // editId ? prefillData?.role : 
+          currentFormData.role}
         onChange={(e) => {
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                role: e.target.value,
-              })
-            : handleCurrentFormData({
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       role: e.target.value,
+          //     })
+          //   : 
+            handleCurrentFormData({
                 ...currentFormData,
                 role: e.target.value,
               });
@@ -182,14 +192,17 @@ const OrganizationInfo = ({
         }}
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
-        value={editId ? prefillData?.tribe : currentFormData.tribe}
+        value={
+          // editId ? prefillData?.tribe : 
+          currentFormData.tribe}
         onChange={(value) =>
-          editId
-            ? setPrefillData({
-                ...prefillData,
-                tribe: value as string,
-              })
-            : handleCurrentFormData({
+          // editId
+          //   ? setPrefillData({
+          //       ...prefillData,
+          //       tribe: value as string,
+          //     })
+          //   : 
+            handleCurrentFormData({
                 ...currentFormData,
                 tribe: value as string,
               })

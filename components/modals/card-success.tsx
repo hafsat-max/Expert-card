@@ -1,7 +1,17 @@
+import { AuthContext, ContextType } from "@/pages/_app";
 import { Modal, Button } from "@mantine/core";
 import Image from "next/image";
+import { useContext } from "react";
 
-export function CardSuccess({ opened, fetchData, close, handleClose }: any) {
+export function CardSuccess({
+  opened,
+  fetchData,
+  close,
+  handleClose,
+  editId,
+  setEditId,
+}: any) {
+  const { setSelectedCard } = useContext(AuthContext) as ContextType;
   return (
     <>
       <Modal
@@ -26,10 +36,10 @@ export function CardSuccess({ opened, fetchData, close, handleClose }: any) {
             height={170}
           />
           <h3 className=" font-semibold  text-davy-grey text-center text-base">
-            Card created successfully
+            Card {editId ? "edited" : "created"} successfully
           </h3>
           <p className=" text-davy-grey text-xs text-center ">
-            Xpert Card has been created successfully.
+            Xpert Card has been {editId ? "edited" : "created"} successfully.
           </p>
 
           <Button
@@ -37,6 +47,7 @@ export function CardSuccess({ opened, fetchData, close, handleClose }: any) {
             onClick={() => {
               handleClose(false);
               fetchData();
+              setSelectedCard([]);
             }}
             className="mb-6 self-center px-10"
             styles={{

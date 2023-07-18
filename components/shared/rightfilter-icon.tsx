@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { toast } from "react-toastify";
 import clsx from "clsx";
@@ -15,12 +15,16 @@ export interface IStates {
   setSelected: React.Dispatch<React.SetStateAction<number>>;
 }
 export interface IFunctions {
-  fetchData: ()=> void;
-  fetchPortrait: ()=>void;
-  fetchLandscape: ()=> void;
+  fetchData: () => void;
+  fetchPortrait: () => void;
+  fetchLandscape: () => void;
 }
 
-const RightFilterIcons = ({fetchData, fetchLandscape, fetchPortrait}: IFunctions) => {
+const RightFilterIcons = ({
+  fetchData,
+  fetchLandscape,
+  fetchPortrait,
+}: IFunctions) => {
   const { selectedCard } = useContext(AuthContext) as ContextType;
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -68,7 +72,12 @@ const RightFilterIcons = ({fetchData, fetchLandscape, fetchPortrait}: IFunctions
         </div>
       ))}
 
-      <CreateCard opened={opened} close={close} editId={selectedCard[0]} />
+      <CreateCard
+        opened={opened}
+        fetchData={fetchData}
+        close={close}
+        editId={selectedCard[0]}
+      />
     </section>
   );
 };

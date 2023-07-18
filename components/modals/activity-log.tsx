@@ -51,15 +51,26 @@ function ActivityLog({ log, setLog }: ILog) {
           {data.map((item, index) => (
             <div key={index} className=" flex flex-col gap2 py-2 pb-3">
               <div className=" flex justify-between items-center gap-2">
-                <div className=" flex items-center">
-                  <div className="bg-[#FCF3E8] w-8 h-8 flex justify-center items-center">
-                    <Image
-                      src="/edit-log.svg"
-                      width={16}
-                      height={16}
-                      alt="icon"
-                    />
-                  </div>
+                <div className=" flex items-center gap-1">
+                  {item?.action_type === "Update" ? (
+                    <div className="bg-[#FCF3E8] w-8 h-8 flex justify-center items-center rounded-lg">
+                      <Image
+                        src="/edit-log.svg"
+                        width={16}
+                        height={16}
+                        alt="icon"
+                      />
+                    </div>
+                  ) : (
+                    <div className="bg-[#EBFAF3] w-8 h-8 flex justify-center items-center rounded-lg">
+                      <Image
+                        src="/plus-log.svg"
+                        width={16}
+                        height={16}
+                        alt="icon"
+                      />
+                    </div>
+                  )}
                   <div className=" flex flex-col gap-2">
                     <p className=" text-sm">{item.data}</p>
                     <p className=" text-[10px] text-[#5E606A]">

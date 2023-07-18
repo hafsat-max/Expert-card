@@ -22,6 +22,7 @@ export interface IModalProps {
 export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [id, setId] = useState(0);
 
   const [successOpened, { open: opensuccess, close: closesuccess }] =
     useDisclosure(false);
@@ -109,13 +110,13 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
         phone_number,
         middle_name,
         email,
-        company_address,
         role,
         tribe,
         card_type,
         profile_picture,
+        company_address,
       } = response.data;
-      setPrefillData(response?.data);
+      // setPrefillData(response?.data);
       setTotalFormData({
         first_name,
         last_name,
@@ -173,13 +174,14 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
     });
     axios({
       url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${id}/`,
-      data: prefillData,
+      data: formData,
       headers: {
         Authorization: `Bearer ${token.token}`,
       },
       method: "put",
     })
       .then(function ({ data }) {
+        setId(data.id);
         close();
         setShowSuccessModal(true);
       })
@@ -316,7 +318,11 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
 
           <Button
             onClick={() => {
-              active == 2 ? sendDetails() : nextStep();
+              active == 2
+                ? editId
+                  ? updatDetails(editId)
+                  : sendDetails()
+                : nextStep();
             }}
             styles={{
               root: {
@@ -336,6 +342,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
       </Modal>
 
       <CardSuccess
+        editId={editId}
         fetchData={fetchData}
         opened={showSuccessModal}
         close={closesuccess}
