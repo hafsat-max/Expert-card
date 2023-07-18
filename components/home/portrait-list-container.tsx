@@ -60,7 +60,7 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
                   )}
                 >
                   <div
-                    className="  w-[176px] h-[310px] flex flex-col gap-3 items-center bg-cover bg-center  justify-center border border-solid rounded-lg relative"
+                    className="  w-[176px] h-[310px] flex flex-col gap-3 items-center bg-cover bg-center  justify-center rounded-lg relative"
                     style={{
                       backgroundImage: "url(/create-card/portrait-bg.png)",
                     }}
@@ -116,7 +116,7 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
                   )}
                 >
                   <div
-                    className="  w-[176px] h-[310px] flex flex-col justify-center gap-3 items-center bg-cover bg-center  border border-solid rounded-lg relative"
+                    className="  w-[176px] h-[310px] flex flex-col justify-center gap-3 items-center bg-cover bg-center rounded-lg relative"
                     style={{
                       backgroundImage: "url(/create-card/portrait-bg.png)",
                     }}

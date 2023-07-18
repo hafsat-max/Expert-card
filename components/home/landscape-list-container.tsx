@@ -42,7 +42,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
                     "p-[5px] hover:opacity-90 rounded-xl"
                   )}
                 >
-                  <div className=" bg-white min-w-[272px] flex flex-col h-[169.72px] border rounded-lg overflow-hidden">
+                  <div className=" bg-white min-w-[272px] flex flex-col h-[169.72px] rounded-lg overflow-hidden">
                     {/* top image */}
                     <div
                       style={{
@@ -117,7 +117,7 @@ const LandscapeListContainer = ({ landscapes }: { landscapes: IXperts[] }) => {
                 >
                   <div
                     className={
-                      " bg-white min-w-[272px] flex gap-10 justify-center p-3 items-center  h-[169.72px] border rounded-lg overflow-hidden bg-cover"
+                      " bg-white min-w-[272px] flex gap-10 justify-center p-3 items-center  h-[169.72px]  rounded-lg overflow-hidden bg-cover"
                     }
                     style={{
                       backgroundImage: "url('/grey-gradient.png')",
