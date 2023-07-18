@@ -63,9 +63,15 @@ const CardStyle = ({
               }`}
               onMouseEnter={() => handleCardFlip(item.id)}
               onMouseLeave={() => handleCardFlip(item.id)}
-              style={{ width: "200px" }}
+              style={{
+                width: "200px",
+                border:
+                  currentFormData.card_type === item.id
+                    ? "2px solid #C81107"
+                    : "2px solid white",
+              }}
             >
-              <div className=" p-1 overflow-hidden border border-white">
+              <div className="overflow-hidden border border-white">
                 <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                   {/* Front side of the card */}
                   <div>
