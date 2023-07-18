@@ -65,7 +65,7 @@ const CardStyle = ({
               onMouseLeave={() => handleCardFlip(item.id)}
               style={{ width: "200px" }}
             >
-              <div>
+              <div className=" p-1 overflow-hidden border border-white">
                 <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                   {/* Front side of the card */}
                   <div>

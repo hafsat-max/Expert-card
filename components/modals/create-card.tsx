@@ -172,6 +172,7 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
     Object.entries(totalFormData).forEach(([key, value]) => {
       formData.append(key, value);
     });
+    setLoader(true);
     axios({
       url: `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${id}/`,
       data: formData,
@@ -184,8 +185,10 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
         setId(data.id);
         close();
         setShowSuccessModal(true);
+        setLoader(false);
       })
       .catch(function (error) {
+        setLoader(false);
         toast.error(error.response.data?.message);
       });
   };

@@ -163,18 +163,8 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={
-          // editId ?
-          // prefillData?.first_name :
-          currentFormData.first_name
-        }
+        value={currentFormData.first_name}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       first_name: e.target.value,
-          //     })
-          //   :
           handleCurrentFormData({
             ...currentFormData,
             first_name: e.target.value,
@@ -198,17 +188,8 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={
-          // editId ? prefillData?.last_name :
-          currentFormData.last_name
-        }
+        value={currentFormData.last_name}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       last_name: e.target.value,
-          //     })
-          //   :
           handleCurrentFormData({
             ...currentFormData,
             last_name: e.target.value,
@@ -230,17 +211,8 @@ const PersonalInfo = ({
             border: "none",
           },
         }}
-        value={
-          // editId ? prefillData?.middle_name :
-          currentFormData.middle_name
-        }
+        value={currentFormData.middle_name}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       middle_name: e.target.value,
-          //     })
-          //   :
           handleCurrentFormData({
             ...currentFormData,
             middle_name: e.target.value,

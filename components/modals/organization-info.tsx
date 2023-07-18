@@ -47,21 +47,12 @@ const OrganizationInfo = ({
         type="textc"
         placeholder="Enter Work Phone"
         label="Work Phone"
-        value={
-          // editId ? prefillData?.phone_number : 
-          currentFormData.phone_number
-        }
+        value={currentFormData.phone_number}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       phone_number: e.target.value,
-          //     })
-          //   : 
-            handleCurrentFormData({
-                ...currentFormData,
-                phone_number: e.target.value,
-              });
+          handleCurrentFormData({
+            ...currentFormData,
+            phone_number: e.target.value,
+          });
         }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
@@ -80,20 +71,12 @@ const OrganizationInfo = ({
         type="email"
         placeholder="Enter Email Address"
         label="Official Email Address"
-        value={
-          // editId ? prefillData?.email : 
-          currentFormData.email}
+        value={currentFormData.email}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       email: e.target.value,
-          //     })
-          //   : 
-            handleCurrentFormData({
-                ...currentFormData,
-                email: e.target.value,
-              });
+          handleCurrentFormData({
+            ...currentFormData,
+            email: e.target.value,
+          });
         }}
         classNames={{
           root: "flex flex-col gap-5 mt-10",
@@ -110,23 +93,12 @@ const OrganizationInfo = ({
             border: "none",
           },
         }}
-        value={
-          // editId
-          //   ? prefillData?.company_address
-          //   : 
-            currentFormData.company_address
-        }
+        value={currentFormData.company_address}
         onChange={(value) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       company_address: value,
-          //     })
-          //   : 
-            handleCurrentFormData({
-                ...currentFormData,
-                company_address: value as string,
-              });
+          handleCurrentFormData({
+            ...currentFormData,
+            company_address: value as string,
+          });
         }}
         label={
           <div className="flex justify-between items-center">
@@ -158,20 +130,12 @@ const OrganizationInfo = ({
           },
         }}
         type="text"
-        value={
-          // editId ? prefillData?.role : 
-          currentFormData.role}
+        value={currentFormData.role}
         onChange={(e) => {
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       role: e.target.value,
-          //     })
-          //   : 
-            handleCurrentFormData({
-                ...currentFormData,
-                role: e.target.value,
-              });
+          handleCurrentFormData({
+            ...currentFormData,
+            role: e.target.value,
+          });
         }}
         placeholder=" Enter Role / Designation"
         label="Role / Designation"
@@ -193,19 +157,14 @@ const OrganizationInfo = ({
         label="Tribe / Department"
         placeholder="Select Tribe / Department"
         value={
-          // editId ? prefillData?.tribe : 
-          currentFormData.tribe}
+          // editId ? prefillData?.tribe :
+          currentFormData.tribe
+        }
         onChange={(value) =>
-          // editId
-          //   ? setPrefillData({
-          //       ...prefillData,
-          //       tribe: value as string,
-          //     })
-          //   : 
-            handleCurrentFormData({
-                ...currentFormData,
-                tribe: value as string,
-              })
+          handleCurrentFormData({
+            ...currentFormData,
+            tribe: value as string,
+          })
         }
         classNames={{
           root: "flex flex-col gap-5 mt-10",
