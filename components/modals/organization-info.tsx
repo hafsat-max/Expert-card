@@ -4,6 +4,8 @@ import Link from "next/link";
 import axios from "axios";
 
 import { PersonalInfoProp } from "./personal-info";
+import AddAddress from "./add-address";
+import { useDisclosure } from "@mantine/hooks";
 
 const OrganizationInfo = ({
   currentFormData,
@@ -13,6 +15,7 @@ const OrganizationInfo = ({
   editId,
 }: PersonalInfoProp) => {
   const [address, setAddress] = useState([]);
+  const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
@@ -105,11 +108,15 @@ const OrganizationInfo = ({
             <span className="text-davy-grey text-sm leading-4">
               Office Address
             </span>
-            <Link href={"/"}>
-              <span className=" text-[#DC372F] underline text-[12px] font-medium cursor-pointer hover:text-blood-red">
-                Add Address
-              </span>
-            </Link>
+            <span
+              onClick={() => {
+                open();
+              }}
+              className=" text-[#DC372F] underline text-[12px] font-medium cursor-pointer hover:text-blood-red"
+            >
+              Add Address
+            </span>
+            <AddAddress opened={opened} close={close} />
           </div>
         }
         placeholder="Select Address"

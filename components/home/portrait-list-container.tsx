@@ -135,10 +135,10 @@ const PortraitListContainer = ({ portraits }: { portraits: IGetData[] }) => {
                     </div>
                   </div>
                 </div>
-                <p className="font-bold text-[#7C827D] text-base pt-2">
+                <p className="font-bold text-[#7C827D] text-base pt-2 text-center">
                   {item.full_name}
                 </p>
-                <p className=" text-[12px] text-[#B4B4B0] font-bold">
+                <p className=" text-[12px] text-[#B4B4B0] font-bold text-center">
                   {item.created_date}
                 </p>
               </section>

@@ -336,6 +336,9 @@ export function CreateCard({ opened, fetchData, close, editId }: IModalProps) {
                 "&:hover": {
                   background: "#6D0802 !important ",
                 },
+                "&:active": {
+                  outline: "1px solid pink",
+                },
               },
             }}
           >

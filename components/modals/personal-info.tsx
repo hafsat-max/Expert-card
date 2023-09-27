@@ -158,6 +158,7 @@ const PersonalInfo = ({
       </Dropzone>
 
       <TextInput
+        required
         styles={{
           input: {
             border: "none",
@@ -183,6 +184,7 @@ const PersonalInfo = ({
       />
 
       <TextInput
+        required
         styles={{
           input: {
             border: "none",

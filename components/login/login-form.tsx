@@ -22,7 +22,6 @@ const LoginForm = () => {
         password: value.password,
       })
       .then(function (response) {
-        const token = JSON.parse(localStorage.getItem("my-user") as string);
 
         if (response.data?.token) {
           localStorage.setItem("my-user", JSON.stringify(response.data));

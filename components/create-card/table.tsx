@@ -1,5 +1,7 @@
+import { usePortal } from "@ibnlanre/portal";
 import { Checkbox, Table } from "@mantine/core";
 import clsx from "clsx";
+import { useEffect } from "react";
 
 export interface IXperts {
   address: string;
@@ -23,6 +25,12 @@ export interface IXperts {
 }
 
 export function TableData({ xperts }: { xperts: IXperts[] }) {
+  const [, setCardLength] = usePortal(["card", "length"]);
+
+  useEffect(() => {
+    setCardLength(xperts.length);
+  }, [xperts]);
+
   const tableHead = (
     <tr className=" overflow-auto">
       <th className=" items-center !pt-8 !py-4">Card</th>

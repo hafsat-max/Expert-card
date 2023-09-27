@@ -10,6 +10,7 @@ import {
 } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export interface UserDetails {
   profile_picture: string;
@@ -26,6 +27,7 @@ export type ContextType = {
 };
 
 export const AuthContext = createContext<ContextType | null>(null);
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<UserDetails | null>(null);
@@ -42,11 +44,13 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <AuthContext.Provider value={storeData}>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <ToastContainer />
-        <Component {...pageProps} />
-      </MantineProvider>
-    </AuthContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContext.Provider value={storeData}>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <ToastContainer />
+          <Component {...pageProps} />
+        </MantineProvider>
+      </AuthContext.Provider>
+    </QueryClientProvider>
   );
 }

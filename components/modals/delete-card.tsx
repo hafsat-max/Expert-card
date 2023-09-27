@@ -22,7 +22,6 @@ function DeleteCard({
 }: DeleteCardsProps) {
   const handleDelete = () => {
     const token = JSON.parse(localStorage.getItem("my-user") as string);
-    // axios.delete()
     axios
       .delete(
         `https://web-production-9c5b.up.railway.app/api/card/expert_cards/${expert_id}/`,
